@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Open Standards](README.md)
+* [Harrier Open Standards](README.md)
 
 ## Technical
 

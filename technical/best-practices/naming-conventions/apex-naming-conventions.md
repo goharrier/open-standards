@@ -8,7 +8,7 @@ Style guide files will be made available for supported IDE's.
 
 ### 1 - Introduction
 
-This document serves as the Style Guide for Ideal Image in the Apex programming language.
+This document serves as the Style Guide of the Apex programming language.
 
 Like other programming style guides, the issues covered span not only aesthetic issues of formatting, but other types of conventions or coding standards as well.
 

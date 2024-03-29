@@ -12,6 +12,6 @@ Good naming conventions in software engineering are critical as they enhance rea
 6. [Profiles](profile-conventions.md)
 7. [Permission Sets / Permission Set Groups](permission-set-group-conventions.md)
 8. [Flows](https://wiki.sfxd.org/books/best-practices/page/flow-naming-conventions) (Follow SFXD Conventions)
-9. [Apex](apex-naming-conventions.md)
+9. [Apex Style Guide](apex-style-guide.md)
 10. API endpoints
 

@@ -10,4 +10,4 @@
     * [Custom Permissions Conventions](technical/best-practices/naming-conventions/custom-permissions-conventions.md)
     * [Profile Conventions](technical/best-practices/naming-conventions/profile-conventions.md)
     * [Permission Set (Group) Conventions](technical/best-practices/naming-conventions/permission-set-group-conventions.md)
-    * [Apex Naming Conventions](technical/best-practices/naming-conventions/apex-naming-conventions.md)
+    * [Apex Style Guide](technical/best-practices/naming-conventions/apex-style-guide.md)

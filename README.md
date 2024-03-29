@@ -1,4 +1,4 @@
-# Harrier Open Standards
+# Open Standards
 
 
 
@@ -26,3 +26,4 @@ This space is dedicated to the development, configuration, deployment, and vario
   * [ ] Project Management
 * [ ] Integration strategies and tools we use and problems they solve
 * [ ] Archetypes / reference architectures
+* [ ] Anti-patterns and how to avoid them

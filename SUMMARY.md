@@ -2,9 +2,12 @@
 
 * [Open Standards](README.md)
 
-## Best Practices
+## Technical
 
-* [Conventions](<README (1).md>)
-  * [Naming conventions](best-practices/conventions/naming-conventions/README.md)
-    * [Object / Metadata Type / Settings Conventions](best-practices/conventions/naming-conventions/object-metadata-type-settings-conventions.md)
-    * [Custom Permissions Conventions](best-practices/conventions/naming-conventions/custom-permissions-conventions.md)
+* [Best Practices](technical/best-practices/README.md)
+  * [Naming conventions](technical/best-practices/naming-conventions/README.md)
+    * [Object / Metadata Type / Settings Conventions](technical/best-practices/naming-conventions/object-metadata-type-settings-conventions.md)
+    * [Custom Permissions Conventions](technical/best-practices/naming-conventions/custom-permissions-conventions.md)
+    * [Profile Conventions](technical/best-practices/naming-conventions/profile-conventions.md)
+    * [Permission Set (Group) Conventions](technical/best-practices/naming-conventions/permission-set-group-conventions.md)
+    * [Apex Naming Conventions](technical/best-practices/naming-conventions/apex-naming-conventions.md)

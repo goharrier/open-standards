@@ -6,9 +6,11 @@
 You can contribute to these open standards by opening a Pull Request to [our repository](https://github.com/goharrier/open-standards).&#x20;
 {% endhint %}
 
-## Welcome to Our Open Standards Documentation
+## Welcome to our Open Standards Documentation
 
 This space is dedicated to the development, configuration, deployment, and various opinionated strategies within the Salesforce ecosystem. Our goal is to ensure a cohesive approach and a shared understanding among our team members and potentially the entire community.
+
+
 
 ## Roadmap
 

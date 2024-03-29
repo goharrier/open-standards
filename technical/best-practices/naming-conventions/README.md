@@ -9,9 +9,8 @@ Good naming conventions in software engineering are critical as they enhance rea
 3. [Validation Rules](https://wiki.sfxd.org/books/best-practices/chapter/validation-rule-conventions) (Follow SFXD Conventions)
 4. [Workflow Rules](https://wiki.sfxd.org/books/best-practices/chapter/workflow-conventions) (Follow SFXD Conventions) :warning: <mark style="color:yellow;">DEPRECATED</mark>
 5. [Custom Permissions](custom-permissions-conventions.md)
-6. Profiles
-7. Permission Sets
-8. Permission Set Groups
-9. [Flows](https://wiki.sfxd.org/books/best-practices/page/flow-naming-conventions) (Follow SFXD Conventions)
-10. API endpoints
+6. [Profiles](profile-conventions.md)
+7. [Permission Sets / Permission Set Groups](permission-set-group-conventions.md)
+8. [Flows](https://wiki.sfxd.org/books/best-practices/page/flow-naming-conventions) (Follow SFXD Conventions)
+9. API endpoints
 

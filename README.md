@@ -27,3 +27,6 @@ This space is dedicated to the development, configuration, deployment, and vario
 * [ ] Integration strategies and tools we use and problems they solve
 * [ ] Archetypes / reference architectures
 * [ ] Anti-patterns and how to avoid them
+* [ ] Overengineering small problems vs "under"engineering young / small organisations
+* [ ] Prototyping
+

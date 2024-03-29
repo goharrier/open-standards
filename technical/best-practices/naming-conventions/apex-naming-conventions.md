@@ -102,7 +102,7 @@ Braces are used with if, else, for, do and while statements, even when the body 
 
 Apex properties may be written like:
 
-```
+```apex
 public integer MyReadOnlyProp { get; }
 public double MyReadWriteProp { get; set; }
 public string MyWriteOnlyProp { set; }
@@ -119,7 +119,7 @@ Braces follow the Kernighan and Ritchie style ("Egyptian brackets") for nonempty
 
 **Example:**
 
-```
+```apex
 private void exampleMethod()
 {
     if (getSomeValue())
@@ -147,7 +147,7 @@ Continuation indents are 2 TABs of total 8 spaces.
 
 **Example:**
 
-```
+```apex
 AccountsSelector.newInstance()
         .selectById(ids)
 ```
@@ -163,33 +163,41 @@ Apex code has a column limit of 120 characters. Except as noted below, any line 
 
 #### 4.4 - Line-wrapping
 
+{% hint style="info" %}
 _Terminology Note:_ When code that might otherwise legally occupy a single line is divided into multiple lines, this activity is called line-wrapping.
+{% endhint %}
 
 There is no comprehensive, deterministic formula showing exactly how to line-wrap in every situation. Very often there are several valid ways to line-wrap the same piece of code.
 
-> _Note:_ While the typical reason for line-wrapping is to avoid overflowing the column limit, even code that would in fact fit within the column limit may be line-wrapped at the author's discretion.
+{% hint style="info" %}
+_Note:_ While the typical reason for line-wrapping is to avoid overflowing the column limit, even code that would in fact fit within the column limit may be line-wrapped at the author's discretion.
+{% endhint %}
 
-> _Tip:_ Extracting a method or local variable may solve the problem without the need to line-wrap.
+{% hint style="info" %}
+_Tip:_ Extracting a method or local variable may solve the problem without the need to line-wrap.
+{% endhint %}
 
 #### 4.4.1 - Where to break
 
 The prime directive of line-wrapping is: prefer to break at a higher syntactic level. Also:
 
 * When a line is broken at a non-assignment operator the break comes before the symbol.
-  * This also applies to the following "operator-like" symbol: the dot separator (.)
+  * This also applies to the following "operator-like" symbol: the dot separator (`.`)
 * When a line is broken at an assignment operator the break typically comes after the symbol, but either way is acceptable. This also applies to the "assignment-operator-like" colon in an enhanced for statement.
-* A method or constructor name stays attached to the open parenthesis (() that follows it.
-* A comma (,) stays attached to the token that precedes it.
+* A method or constructor name stays attached to the open parenthesis (`(`) that follows it.
+* A comma (`,`) stays attached to the token that precedes it.
 
-> _Note:_ The primary goal for line wrapping is to have clear code, not necessarily code that fits in the smallest number of lines.
+{% hint style="info" %}
+_Note:_ The primary goal for line wrapping is to have clear code, not necessarily code that fits in the smallest number of lines.
+{% endhint %}
 
 **4.4.1.1 - SOQL and SOSL statements**
 
 Line breaks are optional but recommended with large queries. A line break comes before a reserved word.
 
-List\<Account> accountList = \[SELECT Id, Name FROM Account];
+`List<Account> accountList = [SELECT Id, Name FROM Account];`
 
-```
+```apex
 List<Account> accountListWithNotes = 
 [
     SELECT Id,
@@ -208,7 +216,7 @@ List<Account> accountListWithNotes =
 
 When defining and populating an array, list, set or an object with multiple attributes, no trailing comma's are allowed and line breaks are recommended for larger objects.
 
-```
+```apex
 // good
 Account newAccount = new Account(
         Name = 'Acme',
@@ -260,31 +268,33 @@ Multiple consecutive blank lines are permitted, but never required (or encourage
 
 Beyond where required by the language or other style rules, and apart from literals, comments and ApexDoc, a single ASCII space also appears in the following places only.
 
-1. Separating any reserved word, such as if, for or catch, from an open parenthesis (() that follows it on that line
-2. Separating any reserved word, such as else or catch, from a closing curly brace (}) that precedes it on that line
+1. Separating any reserved word, such as if, for or catch, from an open parenthesis (`(`) that follows it on that line
+2. Separating any reserved word, such as else or catch, from a closing curly brace (`}`) that precedes it on that line
 3. On both sides of any binary or ternary operator. This also applies to the following "operator-like" symbol:
 
-* the colon (:) in an enhanced for statement. But does not apply to:
-* the dot separator (.), which is written like object.toString()
-* the SOQL local variable reference, which is written like B = \[SELECT Id FROM Account WHERE Id = :A.Id];.
+* the colon (`:`) in an enhanced for statement. But does not apply to:
+* the dot separator (`.`), which is written like `object.toString()`
+* the SOQL local variable reference, which is written like `B = [SELECT Id FROM Account WHERE Id = :A.Id];`.
 
-1. On both sides of the double slash (//) that begins an end-of-line comment. Here, multiple spaces are allowed, but not required.
-2. Between the type and variable of a declaration: List list
+1. On both sides of the double slash (`//`) that begins an end-of-line comment. Here, multiple spaces are allowed, but not required.
+2. Between the type and variable of a declaration: `List list`
 3. Optional just inside both braces of an list initializer
 
-* new List\<Integer> {5, 6} and new List\<Integer> { 5, 6 } are both valid
+* `new List<Integer> {5, 6}` and `new List<Integer> { 5, 6 }` are both valid
 
 This rule is never interpreted as requiring or forbidding additional space at the start or end of a line; it addresses only interior space.
 
 **4.5.3 - Horizontal alignment: never allowed**
 
-> Terminology Note: Horizontal alignment is the practice of adding a variable number of additional spaces in your code with the goal of making certain tokens appear directly below certain other tokens on previous lines.
+{% hint style="info" %}
+_Terminology Note:_ Horizontal alignment is the practice of adding a variable number of additional spaces in your code with the goal of making certain tokens appear directly below certain other tokens on previous lines.
+{% endhint %}
 
 This practice is not allowed.
 
 **Example:**
 
-```
+```apex
 // good
 private Integer x;
 private String str;
@@ -294,13 +304,15 @@ private Integer x;
 private String  str;
 ```
 
-> _**Tip:**_ Alignment can aid readability, but it creates problems for future maintenance so we decided not to allow it. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is allowed. More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a "blast radius." This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts.
+{% hint style="info" %}
+_**Tip:**_ Alignment can aid readability, but it creates problems for future maintenance so we decided not to allow it. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is allowed. More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a "blast radius." This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts.
+{% endhint %}
 
 #### 4.5.4 - Trailing Spaces: never allowed
 
 Sometimes in the course of editing files, you can end up with extra whitespace at the end of lines. These whitespace differences can be picked up by source control systems and flagged as diffs, causing frustration for developers. While this extra whitespace causes no functional issues, we require that trailing spaces be removed before check-in.
 
-```
+```apex
 // good
 private Integer x;
 private String str;
@@ -321,7 +333,7 @@ Optional grouping parentheses are omitted only when author and reviewer agree th
 
 After each comma that follows an enum constant, a line break is optional. Additional blank lines (usually just one) are also allowed. This is one possibility:
 
-```
+```apex
 private enum Answer {
     YES,
 
@@ -332,7 +344,7 @@ private enum Answer {
 
 An enum with no documentation on its constants may optionally be formatted as if it were an list initializer (see [Section 4.7.3.1](https://github.com/wimvelzeboer/fflib-apex-extensions/blob/main/Apex-Styleguide.md#473---lists)) on list initializers).
 
-private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }
+`private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }`
 
 **4.7.2 - Variable declarations**
 
@@ -342,7 +354,7 @@ Local variables are not habitually declared at the start of their containing blo
 
 Any list initializer may optionally be formatted as if it were a "block-like construct." For example, the following are all valid:
 
-```
+```apex
 // Only for short lists:
 List<String> example = new List<String> { 'one', 'two', 'three' };
 
@@ -359,7 +371,7 @@ List<String> example = new List<String>
 
 Annotations applying to a class, method or constructor appear immediately after the documentation block, and on a line of its own. These line breaks do not constitute line-wrapping, so the indentation level is not increased.
 
-```
+```apex
 @deprecated
 @testVisible
 private String getNameIfPresent() { ... }
@@ -367,7 +379,7 @@ private String getNameIfPresent() { ... }
 
 Annotations with more than one argument should break up the arguments on multiple lines.
 
-```
+```apex
 @InvocableMethod(
   label = 'Get Account Names'
   description = 'Returns the list of account names corresponding to the specified account IDs.'
@@ -381,7 +393,7 @@ This section addresses implementation comments. ApexDoc is addressed separately 
 
 Any line break may be preceded by arbitrary whitespace followed by an implementation comment. Such a comment renders the line non-blank.
 
-Block comments are indented at the same level as the surrounding code. They may be in /\* ... _/ style or // ... style. For multi-line /_ ... \*/ comments, subsequent lines must start with \* aligned with the \* on the previous line.
+Block comments are indented at the same level as the surrounding code. They may be in `/* ... /` _style or `// ...` style. For multi-line `/ ... */`\`_comments, subsequent lines must start with `*` aligned with the `*` on the previous line.
 
 ```
 /*
@@ -392,19 +404,21 @@ Block comments are indented at the same level as the surrounding code. They may 
 
 Comments are not enclosed in boxes drawn with asterisks or other characters.
 
-> _**Tip:**_ When writing multi-line comments, use the /\* ... \*/ style if you want automatic code formatters to re-wrap the lines when necessary (paragraph-style). Most formatters don't re-wrap lines in // ... style comment blocks.
+{% hint style="info" %}
+_**Tip:**_ When writing multi-line comments, use the `/* ... */` style if you want automatic code formatters to re-wrap the lines when necessary (paragraph-style). Most formatters don't re-wrap lines in `// ...` style comment blocks.
+{% endhint %}
 
 **4.7.6 - Modifiers**
 
 Class and member modifiers, when present, appear in the order recommended by the Apex Language Specification:
 
-private | protected | public | global virtual | abstract with sharing | without sharing
+`private` | `protected` | `public` | `global` | `virtual` | `abstract` | `with sharing` | `without sharing`
 
 ### 5 - Naming
 
 #### 5.1 - Rules common to all identifiers
 
-Identifiers use only ASCII letters and digits, and, in a small number of cases noted below, underscores. Thus each valid identifier name is matched by the regular expression \w+ .
+Identifiers use only ASCII letters and digits, and, in a small number of cases noted below, underscores. Thus each valid identifier name is matched by the regular expression `\w+` .
 
 The platform reserves use of two consecutive underscores in a name (double underscore). A double underscore cannot be used in a developer name.
 
@@ -432,9 +446,11 @@ Underscores may appear in unit test method names to separate logical components 
 
 Constant names use CONSTANT\_CASE: all uppercase letters, with words separated by underscores. But what is a constant, exactly?
 
-Constants are static final fields whose contents are deeply immutable and whose methods have no detectable side effects. This includes primitives, Strings, immutable types, and immutable collections of immutable types. If any of the instance's observable state can change, it is not a constant. Merely intending to never mutate the object is not enough. Examples:
+Constants are static final fields whose contents are deeply immutable and whose methods have no detectable side effects. This includes primitives, Strings, immutable types, and immutable collections of immutable types. If any of the instance's observable state can change, it is not a constant. Merely intending to never mutate the object is not enough.&#x20;
 
-```
+Examples:
+
+```apex
 // Constants
 public static final Integer NUMBER = 5;
 public static final List<String> NAMES = new List<String> { 'Ed', 'Ann' };
@@ -446,8 +462,9 @@ public enum SomeEnum { ENUM_CONSTANT };
 private static String nonFinal = "non-final";
 private final String nonStatic = "non-static";
 private static final Set<String> mutableCollection = new Set<String>();
-These names are typically nouns or noun phrases.
 ```
+
+These names are typically nouns or noun phrases.
 
 **5.2.4 - Non-constant field names**
 
@@ -483,7 +500,7 @@ All SOQL and SOSL reserved words are written in all uppercase letters.
 
 All data types are written in UpperCamelCase, including Id, collections (Map, Set, List) or Objects (generic SObjects defined in Apex as Object).
 
-Exception: enum should be written in all lowercase letters.
+**Exception:** enum should be written in all lowercase letters.
 
 #### 5.3 - Camel case: defined
 
@@ -500,7 +517,11 @@ Beginning with the prose form of the name:
 
 1. Finally, join all the words into a single identifier.
 
-> _**Note:**_ the casing of the original words is almost entirely disregarded. Examples:
+{% hint style="info" %}
+_**Note:**_ the casing of the original words is almost entirely disregarded.&#x20;
+{% endhint %}
+
+Examples:
 
 | Prose Form              | Correct           | Incorrect         |
 | ----------------------- | ----------------- | ----------------- |
@@ -509,7 +530,9 @@ Beginning with the prose form of the name:
 | "inner stopwatch"       | innerStopwatch    | innerStopWatch    |
 | "supports IPv6 on iOS?" | supportsIpv6OnIos | supportsIPv6OnIOS |
 
-> _**Note:**_ Some words are ambiguously hyphenated in the English language: for example "nonempty" and "non-empty" are both correct, so the method names checkNonempty and checkNonEmpty are likewise both correct.
+{% hint style="info" %}
+_**Note:**_ Some words are ambiguously hyphenated in the English language: for example "nonempty" and "non-empty" are both correct, so the method names checkNonempty and checkNonEmpty are likewise both correct.
+{% endhint %}
 
 ### 6 - Programming Practices
 
@@ -525,7 +548,7 @@ It is incorrect to do nothing in response to a caught exception. Aside from logg
 
 The basic formatting of ApexDoc blocks is as seen in this example:
 
-```
+```apex
 /**
  * A description of the method's functionality would go here.
  *  
@@ -564,7 +587,9 @@ At the minimum, ApexDoc is present for every global, public class, and every glo
 
 ApexDoc is optional for "simple, obvious" methods like getFoo, in cases where there really and truly is nothing else worthwhile to say but "Returns the foo".
 
-> _**Important:**_ it is not appropriate to cite this exception to justify omitting relevant information that a typical reader might need to know. For example, for a method named getCanonicalName, don't omit its documentation (with the rationale that it would say only /\*\* @description Returns the canonical name. \*/) if a typical reader may have no idea what the term "canonical name" means!
+{% hint style="info" %}
+_**Important:**_ it is not appropriate to cite this exception to justify omitting relevant information that a typical reader might need to know. For example, for a method named getCanonicalName, don't omit its documentation (with the rationale that it would say only `/** @description Returns the canonical name. */`) if a typical reader may have no idea what the term "canonical name" means!
+{% endhint %}
 
 **7.3.2 - Exception: overrides**
 
@@ -574,7 +599,7 @@ ApexDoc is not always present on a method that overrides a supertype method.
 
 Other classes and members have ApexDoc as needed or desired.
 
-Whenever an implementation comment would be used to define the overall purpose or behavior of a class or member, that comment is written as ApexDoc instead (using /\*\*).
+Whenever an implementation comment would be used to define the overall purpose or behavior of a class or member, that comment is written as ApexDoc instead (using `/**`).
 
 ### 8 - Testing
 
@@ -582,9 +607,9 @@ Whenever an implementation comment would be used to define the overall purpose o
 
 **8.1.1 - Test Classes**
 
-Test classes are annotated with @isTest. This omits them from code coverage considerations at the time of deployment and packaging. All test classes are private.
+Test classes are annotated with `@isTest`. This omits them from code coverage considerations at the time of deployment and packaging. All test classes are private.
 
-```
+```apex
 @isTest
 private class ExampleTest
 {
@@ -594,11 +619,11 @@ private class ExampleTest
 
 **8.1.2 - Test Methods**
 
-Each test is annotated with a simple @isTest on the line proceeding the method declaration. This keeps it consistent with the declaration of a test class.
+Each test is annotated with a simple `@isTest` on the line proceeding the method declaration. This keeps it consistent with the declaration of a test class.
 
 The name of a test method is descriptive as to what is being tested, what conditions apply to the method under test, what the expected outcome is. It should always start with "itShould..."
 
-```
+```apex
 @isTest
 private static void itShouldReturnANewAccountRecordWhenAccountDoesNotExists()
 {
@@ -608,7 +633,7 @@ private static void itShouldReturnANewAccountRecordWhenAccountDoesNotExists()
 
 or
 
-```
+```apex
 static testMethod void itShouldReturnANewAccountRecordWhenAccountDoesNotExists()
 {
     ...
@@ -617,15 +642,15 @@ static testMethod void itShouldReturnANewAccountRecordWhenAccountDoesNotExists()
 
 **8.1.3 - SeeAllData**
 
-The @isTest(SeeAllData=true) test setting should be avoided unless absolutely necessary. Part of writing safe, high quality tests is to ensure that your test data is unchanging.
+The `@isTest(SeeAllData=true)` test setting should be avoided unless absolutely necessary. Part of writing safe, high quality tests is to ensure that your test data is unchanging.
 
 This test setting allows your tests to use live data in your Salesforce org. Any user could change that data at any time and in turn, cause your test to fail.
 
 **8.1.4- Starting and Stopping**
 
-In a test method, the System.Test.startTest() and System.Test.stopTest() method calls are to be used to isolate the single operation under test from any test setup code, by resetting the limits.
+In a test method, the `System.Test.startTest()` and `System.Test.stopTest()` method calls are to be used to isolate the single operation under test from any test setup code, by resetting the limits.
 
-```
+```apex
 @isTest
 private static void itShouldReturnANewAccountRecordWhenAccountDoesNotExists()
 {
@@ -650,15 +675,15 @@ private static void itShouldReturnANewAccountRecordWhenAccountDoesNotExists()
 
 When possible, utilize mocking functionality. Mocking cuts down on test execution time by decoupling your code from the Salesforce database when running tests which interact with SObject records.
 
-One such way is via the fflib-apex-mocks project. This allows for convenient mocking.
+One such way is via the [fflib-apex-mocks](https://github.com/apex-enterprise-patterns/fflib-apex-mocks) project. This allows for convenient mocking.
 
 **8.2.1 - Class Considerations**
 
 When utilizing mocking, it is required by the platform to have access to a constructor which is public or global and contains zero arguments.
 
-If you do not wish to expose a zero argument constructor in a given class, you can declare a @testVisible, protected constructor.
+If you do not wish to expose a zero argument constructor in a given class, you can declare a `@testVisible`, protected constructor.
 
-```
+```apex
 public class Example
 {
     /**
@@ -671,11 +696,11 @@ public class Example
 
 **8.2.2 - Method Considerations**
 
-When restricting code blocks for purposes of mocking, check if the mock instance is null prior to checking if System.Test.isRunningTest().
+When restricting code blocks for purposes of mocking, check if the mock instance is null prior to checking if `System.Test.isRunningTest()`.
 
-This lessens the opportunity for any such performance bottlenecks that could occur at runtime during the checking of System.Test.isRunningTest() as it is secondary to the mocking null check.
+This lessens the opportunity for any such performance bottlenecks that could occur at runtime during the checking of `System.Test.isRunningTest()` as it is secondary to the mocking null check.
 
-```
+```apex
 if (mockInstance != null && Test.isRunningTest())
 {
     return mockInstance;

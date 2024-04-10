@@ -45,9 +45,9 @@ Replace with a view into the design discussions, why we chose one thing versus a
 
 Replace with a table of all metadata components involved. No need to go into extreme detail unless required, use judgement. (page layouts, custom fields, etc.)
 
-| Component                                   | Description                                                                     |
-| ------------------------------------------- | ------------------------------------------------------------------------------- |
-| RegisterNewOpportunity\_SF Flow             | Captures user input for new opportunity registration.                           |
-| Validation Rules                            | Ensures data integrity with selective bypass for portal users.                  |
-| Email Notification Flows                    | Manages email communications regarding opportunity submissions and assignments. |
-| partnerLeadDetail, partnerOpportunityDetail | Custom components for detailed viewing of lead and opportunity records.         |
+| Component                | Description                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| Example\_SF Flow         | Captures user input for new X registration.                                     |
+| Validation Rules         | Ensures data integrity with selective bypass for X users.                       |
+| Email Notification Flows | Manages email communications regarding opportunity submissions and assignments. |
+| componentDetail          | Custom lwc for detailed viewing of lead and opportunity records.                |

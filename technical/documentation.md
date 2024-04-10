@@ -18,7 +18,9 @@ A concise description of the issue that necessitates a design solution. This sta
 
 #### **Research Insights**
 
-Summarize the research conducted to understand the problem better. Include:
+Summarize the research conducted to understand the problem better.
+
+Include:
 
 * The components evaluated during the problem analysis.
 * Any relevant environmental or contextual factors, such as the customer's internal capabilities. For instance, if a customer's team consists only of administrators, why would we opt to configure all triggers in Apex rather than leveraging Salesforce Flows? This section aims to shed light on the rationale behind certain design considerations based on research findings.
@@ -48,6 +50,12 @@ Summarize the chosen solution and justify the decision. This section should prov
 
 ## Feature Design Documentation
 
+Design documentation is essential for individual features, not just for stories. It's crucial to design larger features thoroughly, rather than designing each story separately, to avoid a chaotic and poorly designed amalgamation of elements.
+
+While smaller adjustments or enhancements to these features might not always necessitate changes in the documentation, their potential impact should still be assessed. Such documentation should be organized at the epic level to ensure clarity and cohesion.&#x20;
+
+When creating this feature-level documentation, it's useful to conduct a gut check: consider how often the documentation will need to be adjusted when new stories are introduced. If the answer is "often," then the documentation is too detailed at a low level.
+
 ### Template: Feature Name
 
 #### **Functionality Design Goals**
@@ -76,3 +84,5 @@ Provide a comprehensive table or list of all metadata components involved in the
 | Validation Rules         | Ensures data integrity with selective bypass for X users.                       |
 | Email Notification Flows | Manages email communications regarding opportunity submissions and assignments. |
 | componentDetail          | Custom lwc for detailed viewing of lead and opportunity records.                |
+
+_Table: Example component list_

@@ -2,8 +2,8 @@
 
 ## Diagrams
 
-* [ ] System Architecture Diagram
-* [ ] ERD
+* [ ] [System Architecture Diagram](https://architect.salesforce.com/diagrams/framework/docs-implementation)
+* [ ] [ERD](https://architect.salesforce.com/diagrams/framework/data-model-notation)
 * [ ] Data Flow Diagrams
 
 ## **Design Decisions**

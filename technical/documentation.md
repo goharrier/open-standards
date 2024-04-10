@@ -3,6 +3,7 @@
 ## Diagrams
 
 * [ ] System Architecture Diagram
+* [ ] ERD
 * [ ] Data Flow Diagrams
 
 ## **Design Decisions**

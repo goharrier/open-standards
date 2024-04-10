@@ -11,6 +11,7 @@
     * [Profile Conventions](technical/best-practices/naming-conventions/profile-conventions.md)
     * [Permission Set (Group) Conventions](technical/best-practices/naming-conventions/permission-set-group-conventions.md)
     * [Apex Style Guide](technical/best-practices/naming-conventions/apex-style-guide.md)
+* [Documentation](technical/documentation.md)
 
 ## Functional
 

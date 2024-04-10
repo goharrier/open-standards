@@ -29,4 +29,7 @@ This space is dedicated to the development, configuration, deployment, and vario
 * [ ] Anti-patterns and how to avoid them
 * [ ] Overengineering small problems vs "under"engineering young / small organisations
 * [ ] Prototyping
+* [ ] Documentation approach:
+  * [ ] Technical Documentation
+  * [ ] Functional Documentation
 

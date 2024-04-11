@@ -54,7 +54,9 @@ Design documentation is essential for individual features, not just for stories.
 
 While smaller adjustments or enhancements to these features might not always necessitate changes in the documentation, their potential impact should still be assessed. Such documentation should be organized at the epic level to ensure clarity and cohesion.&#x20;
 
+{% hint style="info" %}
 When creating this feature-level documentation, it's useful to conduct a gut check: consider how often the documentation will need to be adjusted when new stories are introduced. If the answer is "often," then the documentation is too detailed at a low level.
+{% endhint %}
 
 ### Template: Feature Name
 
@@ -76,7 +78,9 @@ Dive into the critical design discussions that shaped the final design choice. H
 
 #### **Components List**
 
-Provide a comprehensive table or list of all metadata components involved in the feature's design. While exhaustive detail isn't necessary for each component, employ discretion to decide when additional explanation is warranted. Essential components might include objects, main entry apex classes, lightning web components, and more. This list serves as a blueprint of the technical elements that constitute the feature.
+Provide a comprehensive table or list of all metadata components involved in the feature's design. While exhaustive detail isn't necessary for each component, employ discretion to decide when additional explanation is warranted. Essential components might include objects, main entry apex classes, lightning web components, and more.&#x20;
+
+This list serves as a blueprint of the technical elements that constitute the feature.
 
 | Component                | Description                                                                     |
 | ------------------------ | ------------------------------------------------------------------------------- |

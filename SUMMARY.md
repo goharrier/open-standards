@@ -16,3 +16,4 @@
 ## Functional
 
 * [Requirement definition](functional/requirement-definition.md)
+* [Documentation](functional/documentation.md)

@@ -16,7 +16,7 @@
 * [Frameworks](technical/frameworks/README.md)
   * [flxbl - Continuous Delivery](technical/frameworks/flxbl-continuous-delivery.md)
   * [fflib - Apex Framework](technical/frameworks/fflib-apex-framework.md)
-  * [Nebula - Logging](technical/frameworks/nebula-logging.md)
+  * [Nebula Logger - Logging](technical/frameworks/nebula-logger-logging.md)
 
 ## Functional
 

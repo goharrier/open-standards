@@ -14,7 +14,7 @@
   * [Feature flags](technical/best-practices/feature-flags.md)
 * [Documentation](technical/documentation.md)
 * [Frameworks](technical/frameworks/README.md)
-  * [Flxbl - Continuous Delivery](technical/frameworks/flxbl-continuous-delivery.md)
+  * [flxbl - Continuous Delivery](technical/frameworks/flxbl-continuous-delivery.md)
   * [fflib - Apex Framework](technical/frameworks/fflib-apex-framework.md)
   * [Nebula - Logging](technical/frameworks/nebula-logging.md)
 

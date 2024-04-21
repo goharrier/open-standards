@@ -11,7 +11,12 @@
     * [Profile Conventions](technical/best-practices/naming-conventions/profile-conventions.md)
     * [Permission Set (Group) Conventions](technical/best-practices/naming-conventions/permission-set-group-conventions.md)
     * [Apex Style Guide](technical/best-practices/naming-conventions/apex-style-guide.md)
+  * [Feature flags](technical/best-practices/feature-flags.md)
 * [Documentation](technical/documentation.md)
+* [Frameworks](technical/frameworks/README.md)
+  * [Flxbl - Continuous Delivery](technical/frameworks/flxbl-continuous-delivery.md)
+  * [fflib - Apex Framework](technical/frameworks/fflib-apex-framework.md)
+  * [Nebula - Logging](technical/frameworks/nebula-logging.md)
 
 ## Functional
 

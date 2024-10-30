@@ -24,5 +24,6 @@
 
 ## Functional
 
-* [Requirement definition](functional/requirement-definition.md)
+* [Requirement definition](functional/requirement-definition/README.md)
+  * [GPT Instructions](functional/requirement-definition/gpt-instructions.md)
 * [Documentation](functional/documentation.md)

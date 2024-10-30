@@ -19,6 +19,7 @@
   * [Nebula Logger - Logging](technical/frameworks/nebula-logger-logging.md)
 * [Integration Strategies](technical/integration-strategies/README.md)
   * [Data warehouse & Reverse ETL](technical/integration-strategies/data-warehouse-and-reverse-etl.md)
+* [Development & Deployment Strategies](technical/development-and-deployment-strategies.md)
 
 ## Functional
 

@@ -16,6 +16,7 @@ This space is dedicated to the development, configuration, deployment, and vario
 
 ## Roadmap
 
+* [ ] Software Engineering Design Patterns we apply and references to how to use them in Apex / lwc. Refer to generic documentation online on the theory.
 * [ ] Conventions on development and configuration
 * [ ] Strategies we use for shaping requirements, translating requirements into technical solution designs and documentation.
 * [ ] Our PMO approach

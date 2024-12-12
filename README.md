@@ -20,6 +20,9 @@ This space is dedicated to the development, configuration, deployment, and vario
 * [ ] Strategies we use for shaping requirements, translating requirements into technical solution designs and documentation.
 * [ ] Our PMO approach
 * [ ] Frameworks / reusable components we use and build (fflib, nebula, etc.)
+  * [ ] Refactoring approaches
+  * [ ] Practical examples explaining each step of refactoring
+  * [ ] Code examples on what good looks like vs bad
 * [ ] Tools we use for:
   * [ ] DevOps
   * [ ] Development
@@ -27,9 +30,12 @@ This space is dedicated to the development, configuration, deployment, and vario
 * [ ] Integration strategies and tools we use and problems they solve
 * [ ] Archetypes / reference architectures
 * [ ] Anti-patterns and how to avoid them
+  * [ ] Practical examples with code / configuration
 * [ ] Overengineering small problems vs "under"engineering young / small organisations
+  * [ ] Practical examples with code / configuration
 * [ ] Prototyping
 * [ ] Documentation approach:
   * [ ] Technical Documentation
   * [ ] Functional Documentation
+  * [ ] GPT instructions to aid documentation generation
 

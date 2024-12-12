@@ -20,6 +20,9 @@ This space is dedicated to the development, configuration, deployment, and vario
 * [ ] Conventions on development and configuration
 * [ ] Strategies we use for shaping requirements, translating requirements into technical solution designs and documentation.
 * [ ] Our PMO approach
+  * [ ] No nonsense
+  * [ ] Clear & honest communication
+  * [ ] Always come up with a plan
 * [ ] Frameworks / reusable components we use and build (fflib, nebula, etc.)
   * [ ] Refactoring approaches
   * [ ] Practical examples explaining each step of refactoring

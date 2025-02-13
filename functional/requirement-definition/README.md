@@ -148,7 +148,7 @@ Below is a **copy-paste-ready template** you can use for your own user stories. 
 ***
 
 ```
-markdownCopy## User Story
+## User Story
 
 **As a** [user persona or role],  
 **I want** [capability or functionality],  

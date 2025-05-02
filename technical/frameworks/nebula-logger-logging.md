@@ -58,7 +58,7 @@ Several alternatives to Nebula Logger exist for handling logging in Salesforce:
 
 2. **Custom-Built Logging Solutions**: Organizations can build their own logging frameworks, but this requires significant development time and ongoing maintenance without the benefit of community support and continuous improvement.
 
-3. **External Logging Services**: Solutions like Loggly, Rollbar, or Kibana can be integrated with Salesforce, but require additional infrastructure, often have per-seat licensing costs, and require developing integration points between Salesforce and external systems.
+3. **External Logging Services**: Solutions like Loggly or Rollbar can be integrated with Salesforce, but require additional infrastructure, often have per-seat licensing costs, and require developing integration points between Salesforce and external systems.
 
 4. **AppExchange Logging Solutions**: Various paid logging solutions exist on the AppExchange, but many have ongoing subscription costs and may not provide the same level of flexibility and customization.
 

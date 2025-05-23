@@ -136,6 +136,12 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            // GitHub username to Slack user ID mapping
+            const userMapping = {
+              "jackcroninuipath": "U03K7LGLLRK",
+              "Stephen-Browne": "U049B624K0T"
+            };
+            
             const { data: prs } = await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -157,7 +163,10 @@ jobs:
                              daysSinceCreated === 1 ? '1 day ago' : 
                              `${daysSinceCreated} days ago`;
             
-              const reviewRequests = pr.requested_reviewers?.map(r => r.login).join(', ') || 'None';
+              const reviewRequests = pr.requested_reviewers?.map(reviewer => {
+                const slackId = userMapping[reviewer.login];
+                return slackId ? `<@${slackId}>` : reviewer.login;
+              }).join(', ') || 'None';
             
               message += `• <${pr.html_url}|${pr.title}>\n`;
               message += `  👤 ${pr.user.login} • 📅 ${ageText} \n • Reviewers: 👀 - ${reviewRequests}\n\n`;
@@ -170,5 +179,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: ${{ steps.get-prs.outputs.message }}
-          SLACK_TITLE: Documentation Needing Review
+          SLACK_TITLE: Documentation Needing Review!
           SLACK_USERNAME: GitHub Bot
+          SLACK_FOOTER: Attempt to get all open documentation requests reviewed ASAP
+          MSG_MINIMAL: true

@@ -149,7 +149,7 @@ jobs:
               return;
             }
             
-            let message = `📋 *${prs.length} Open Pull Request${prs.length > 1 ? 's' : ''}*\n\n`;
+            let message = `📋 *${prs.length} Open Documentation Pull Request${prs.length > 1 ? 's' : ''}*\n\n`;
             
             for (const pr of prs) {
               const daysSinceCreated = Math.floor((Date.now() - new Date(pr.created_at)) / (1000 * 60 * 60 * 24));
@@ -160,7 +160,7 @@ jobs:
               const reviewRequests = pr.requested_reviewers?.map(r => r.login).join(', ') || 'None';
             
               message += `• <${pr.html_url}|${pr.title}>\n`;
-              message += `  👤 ${pr.user.login} • 📅 ${ageText} • 👀 ${reviewRequests}\n\n`;
+              message += `  👤 ${pr.user.login} • 📅 ${ageText} \n • Reviewers: 👀 - ${reviewRequests}\n\n`;
             }
             
             core.setOutput('message', message);
@@ -170,5 +170,5 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: ${{ steps.get-prs.outputs.message }}
-          SLACK_TITLE: Daily PR Summary
+          SLACK_TITLE: Documentation Needing Review
           SLACK_USERNAME: GitHub Bot

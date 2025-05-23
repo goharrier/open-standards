@@ -16,20 +16,52 @@
 #        run: |
 #          curl -X POST -H 'Content-type: application/json' -H 'Authorization: Bearer ${{ secrets.SLACK_TOKEN}}' --data "{\"channel\":\"gitbook-pr-test\",\"text\":\"New PR created\\nDetails: *${{github.event.pull_request.title}}*\\nAuthor: *${{github.event.pull_request.user.login}}*\\n${{github.event.pull_request.html_url}}\"}" https://slack.com/api/chat.postMessage
 
-name: Notify Pull Request Slack
 
+
+
+#name: Notify Pull Request Slack
+#
+#on:
+#  pull_request:
+#    types:
+#      - opened
+#      - reopened
+#      - closed
+#
+#jobs:
+#  notify:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: daint2git/pull-request-slack-notifier@v1
+#        with:
+#          slack-bot-token: ${{ secrets.SLACK_TOKEN }}
+#          slack-channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+#          user-mapping: |
+#            {
+#              "jackcroninuipath": "U03K7LGLLRK",
+#            "Stephen-Browne": "U049B624K0T"
+#            }
+#
+#
+
+
+
+name: Daily PR Summary
 on:
   pull_request:
-    types:
-      - opened
-      - reopened
-      - closed
+    types: [opened]           # Test trigger - runs when PR is opened
+  workflow_dispatch:          # Allow manual testing
 
 jobs:
-  notify:
+  pr-summary:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
     steps:
-      - uses: daint2git/pull-request-slack-notifier@v1
+      - name: Get Open PRs
+        id: get-prs
+        uses: actions/github-script@v7
         with:
           script: |
             const { data: prs } = await github.rest.pulls.list({
@@ -67,6 +99,16 @@ jobs:
           status: custom
           custom_payload: |
             {
-              "jackcroninuipath": "U03K7LGLLRK",
-            "Stephen-Browne": "U049B624K0T"
+              "text": "Daily PR Summary",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ steps.get-prs.outputs.message }}"
+                  }
+                }
+              ]
             }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

@@ -1,8 +1,8 @@
 name: Daily PR Summary
 on:
-  schedule:
-    - cron: '0 14 * * 1-5'  # 2 PM UTC, weekdays (adjust for your timezone)
-  workflow_dispatch:        # Allow manual testing
+  pull_request:
+    types: [opened]           # Test trigger - runs when PR is opened
+  workflow_dispatch:          # Allow manual testing
 
 jobs:
   pr-summary:

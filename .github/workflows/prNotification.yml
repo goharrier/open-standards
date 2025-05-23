@@ -1,17 +1,40 @@
-name: PR Slack Notification
+#name: PR Slack Notification
+#
+#on:
+#  pull_request:
+#    types: [opened]
+#
+#env:
+#  SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+#
+#jobs:
+#  send-notification:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Notify Slack
+#        run: |
+#          curl -X POST -H 'Content-type: application/json' -H 'Authorization: Bearer ${{ secrets.SLACK_TOKEN}}' --data "{\"channel\":\"gitbook-pr-test\",\"text\":\"New PR created\\nDetails: *${{github.event.pull_request.title}}*\\nAuthor: *${{github.event.pull_request.user.login}}*\\n${{github.event.pull_request.html_url}}\"}" https://slack.com/api/chat.postMessage
+
+name: Notify Pull Request Slack
 
 on:
   pull_request:
-    types: [opened]
-
-env:
-  SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+    types:
+      - opened
+      - reopened
+      - closed
 
 jobs:
-  send-notification:
+  notify:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Notify Slack
-        run: |
-          curl -X POST -H 'Content-type: application/json' -H 'Authorization: Bearer ${{ secrets.SLACK_TOKEN}}' --data "{\"channel\":\"gitbook-pr-test\",\"text\":\"New PR created\\nDetails: *${{github.event.pull_request.title}}*\\nAuthor: *${{github.event.pull_request.user.login}}*\\n${{github.event.pull_request.html_url}}\"}" https://slack.com/api/chat.postMessage	
+      - uses: daint2git/pull-request-slack-notifier@v1
+        with:
+          slack-bot-token: ${{ secrets.SLACK_TOKEN }}
+          slack-channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          user-mapping: |
+            {
+              "jackcroninuipath": "U03K7LGLLRK",
+            "Stephen-Browne": "U049B624K0T"
+            }

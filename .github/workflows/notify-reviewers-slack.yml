@@ -1,0 +1,79 @@
+name: New PR Notifications
+on:
+  pull_request:
+    types: [opened, reopened]           # Triggers when a new PR is opened
+
+jobs:
+  notify-new-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
+    steps:
+      - name: Get PR Details and Notify
+        id: pr-details
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // GitHub username to Slack user ID mapping
+            const userMapping = {
+              "jackcroninuipath": "U03K7LGLLRK",
+              "Stephen-Browne": "U049B624K0T",
+              "JAertgeerts": "U87A5RJ1E",
+              "JMac1066": "U05MQ0K80E4",
+              "hongi-pham": "U06SYQ3CPUJ",
+              "javier-orbe-harrier": "U08DDJEQGEQ",
+              "sathishgoharrier": "U03088B4FJP",
+              "tverellen": "U08240CELP8",
+              "wimvelzeboer": "U025WNW8RU4"
+            };
+            
+            // Get the PR that triggered this workflow
+            const pr = context.payload.pull_request;
+            
+            // Calculate age (should be "just now" for new PRs)
+            const minutesSinceCreated = Math.floor((Date.now() - new Date(pr.created_at)) / (1000 * 60));
+            const ageText = minutesSinceCreated < 5 ? 'just now' : `${minutesSinceCreated} minutes ago`;
+            
+            // Get requested reviewers and convert to Slack mentions
+            const reviewers = pr.requested_reviewers || [];
+            const reviewerMentions = reviewers.map(reviewer => {
+              const slackId = userMapping[reviewer.login];
+              return slackId ? `<@${slackId}>` : `@${reviewer.login}`;
+            });
+            
+            // Get requested teams (if any)
+            const teams = pr.requested_teams || [];
+            const teamMentions = teams.map(team => `@${team.name}`);
+            
+            // Combine all reviewers
+            const allReviewers = [...reviewerMentions, ...teamMentions];
+            const reviewerText = allReviewers.length > 0 ? allReviewers.join(', ') : 'None assigned';
+            
+            // Build the Slack message
+            let message = `🆕 Pull Request Opened!*\n\n`;
+            message += `📋 <${pr.html_url}|${pr.title}>\n`;
+            message += `👤 Author: ${pr.user.login}\n`;
+            message += `📅 Created: ${ageText}\n`;
+            message += `👀 Reviewers: ${reviewerText}\n\n`;
+            
+            if (allReviewers.length > 0) {
+              message += `${allReviewers.join(' ')} - Please review! 🙏`;
+            } else {
+              message += `⚠️ No reviewers assigned yet. Please assign reviewers for this PR.`;
+            }
+            
+            core.setOutput('message', message);
+            core.setOutput('pr_title', pr.title);
+            core.setOutput('pr_author', pr.user.login);
+
+      - name: Send Slack notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: ${{ steps.pr-details.outputs.message }}
+          SLACK_TITLE: "📢 New PR: ${{ steps.pr-details.outputs.pr_title }}"
+          SLACK_USERNAME: GitHub Bot
+          SLACK_FOOTER: "PR opened by ${{ steps.pr-details.outputs.pr_author }}"
+          MSG_MINIMAL: true
+          ENABLE_ESCAPES: true

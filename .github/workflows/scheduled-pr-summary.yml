@@ -1,11 +1,8 @@
 name: Open Pull Requests Summary
 on:
-  pull_request:
-    types: [opened, reopened]           # Test trigger - runs when PR is opened
   workflow_dispatch:          # Allow manual testing
-  # schedule:
-  #   - cron: '0 14 * * 1-5'  # 2 PM UTC, weekdays (uncomment later)
-
+  schedule:
+    - cron: '0 12 * * 1-5'  # 2 PM UTC, weekdays 
 jobs:
   pr-summary:
     runs-on: ubuntu-latest

@@ -1,4 +1,4 @@
-name: New PR Notification
+name: New PR Notifications
 on:
   pull_request:
     types: [opened, reopened]           # Triggers when a new PR is opened
@@ -51,14 +51,14 @@ jobs:
             const reviewerText = allReviewers.length > 0 ? allReviewers.join(', ') : 'None assigned';
             
             // Build the Slack message
-            let message = `🆕 *New Pull Request Opened!*\n\n`;
+            let message = `🆕 Pull Request Opened!*\n\n`;
             message += `📋 <${pr.html_url}|${pr.title}>\n`;
-            message += `👤 **Author:** ${pr.user.login}\n`;
-            message += `📅 **Created:** ${ageText}\n`;
-            message += `👀 **Reviewers:** ${reviewerText}\n\n`;
+            message += `👤 Author: ${pr.user.login}\n`;
+            message += `📅 Created: ${ageText}\n`;
+            message += `👀 Reviewers: ${reviewerText}\n\n`;
             
             if (allReviewers.length > 0) {
-              message += `${allReviewers.join(' ')} - Please review when you have a chance! 🙏`;
+              message += `${allReviewers.join(' ')} - Please review! 🙏`;
             } else {
               message += `⚠️ No reviewers assigned yet. Please assign reviewers for this PR.`;
             }
@@ -76,3 +76,4 @@ jobs:
           SLACK_USERNAME: GitHub Bot
           SLACK_FOOTER: "PR opened by ${{ steps.pr-details.outputs.pr_author }}"
           MSG_MINIMAL: true
+          ENABLE_ESCAPES: true

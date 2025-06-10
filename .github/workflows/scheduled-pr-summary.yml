@@ -1,122 +1,4 @@
-#name: PR Slack Notification
-#
-#on:
-#  pull_request:
-#    types: [opened]
-#
-#env:
-#  SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
-#
-#jobs:
-#  send-notification:
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: Notify Slack
-#        run: |
-#          curl -X POST -H 'Content-type: application/json' -H 'Authorization: Bearer ${{ secrets.SLACK_TOKEN}}' --data "{\"channel\":\"gitbook-pr-test\",\"text\":\"New PR created\\nDetails: *${{github.event.pull_request.title}}*\\nAuthor: *${{github.event.pull_request.user.login}}*\\n${{github.event.pull_request.html_url}}\"}" https://slack.com/api/chat.postMessage
-
-
-
-
-#name: Notify Pull Request Slack
-#
-#on:
-#  pull_request:
-#    types:
-#      - opened
-#      - reopened
-#      - closed
-#
-#jobs:
-#  notify:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: daint2git/pull-request-slack-notifier@v1
-#        with:
-#          slack-bot-token: ${{ secrets.SLACK_TOKEN }}
-#          slack-channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
-#          user-mapping: |
-#            {
-#              "jackcroninuipath": "U03K7LGLLRK",
-#            "Stephen-Browne": "U049B624K0T"
-#            }
-#
-#
-
-#
-#
-#name: Daily PR Summary
-#on:
-#  pull_request:
-#    types: [opened]           # Test trigger - runs when PR is opened
-#  workflow_dispatch:          # Allow manual testing
-#
-#jobs:
-#  pr-summary:
-#    runs-on: ubuntu-latest
-#    permissions:
-#      pull-requests: read
-#      contents: read
-#    steps:
-#      - name: Get Open PRs
-#        id: get-prs
-#        uses: actions/github-script@v7
-#        with:
-#          script: |
-#            const { data: prs } = await github.rest.pulls.list({
-#              owner: context.repo.owner,
-#              repo: context.repo.repo,
-#              state: 'open',
-#              sort: 'created',
-#              direction: 'desc'
-#            });
-#
-#            if (prs.length === 0) {
-#              core.setOutput('message', '🎉 No open pull requests!');
-#              return;
-#            }
-#
-#            let message = `📋 *${prs.length} Open Pull Request${prs.length > 1 ? 's' : ''}*\n\n`;
-#
-#            for (const pr of prs) {
-#              const daysSinceCreated = Math.floor((Date.now() - new Date(pr.created_at)) / (1000 * 60 * 60 * 24));
-#              const ageText = daysSinceCreated === 0 ? 'today' :
-#                             daysSinceCreated === 1 ? '1 day ago' :
-#                             `${daysSinceCreated} days ago`;
-#
-#              const reviewRequests = pr.requested_reviewers?.map(r => r.login).join(', ') || 'None';
-#
-#              message += `• <${pr.html_url}|${pr.title}>\n`;
-#              message += `  👤 ${pr.user.login} • 📅 ${ageText} • 👀 ${reviewRequests}\n\n`;
-#            }
-#
-#            core.setOutput('message', message);
-#
-#      - name: Send Slack notification
-#        uses: 8398a7/action-slack@v3
-#        with:
-#          status: custom
-#          custom_payload: |
-#            {
-#              "text": "Daily PR Summary",
-#              "blocks": [
-#                {
-#                  "type": "section",
-#                  "text": {
-#                    "type": "mrkdwn",
-#                    "text": "${{ steps.get-prs.outputs.message }}"
-#                  }
-#                }
-#              ]
-#            }
-#        env:
-#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
-
-
-
-name: PR Summary Test
+name: Open Pull Requests Summary
 on:
   pull_request:
     types: [opened, reopened]           # Test trigger - runs when PR is opened
@@ -139,7 +21,14 @@ jobs:
             // GitHub username to Slack user ID mapping
             const userMapping = {
               "jackcroninuipath": "U03K7LGLLRK",
-              "Stephen-Browne": "U049B624K0T"
+              "Stephen-Browne": "U049B624K0T",
+              "JAertgeerts": "U87A5RJ1E",
+              "JMac1066": "U05MQ0K80E4",
+              "hongi-pham": "U06SYQ3CPUJ",
+              "javier-orbe-harrier": "U08DDJEQGEQ",
+              "sathishgoharrier": "U03088B4FJP",
+              "tverellen": "U08240CELP8",
+              "wimvelzeboer": "U025WNW8RU4"
             };
             
             const { data: prs } = await github.rest.pulls.list({
@@ -183,3 +72,4 @@ jobs:
           SLACK_USERNAME: GitHub Bot
           SLACK_FOOTER: Attempt to get all open documentation requests reviewed ASAP
           MSG_MINIMAL: true
+          ENABLE_ESCAPES: true

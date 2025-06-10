@@ -1,0 +1,5 @@
+# CODEOWNERS - Global reviewers for all files
+# Place this file at: /.github/CODEOWNERS
+
+# Global rule: all files (*) are owned by these users
+* @jackcroninuipath @Stephen-Browne

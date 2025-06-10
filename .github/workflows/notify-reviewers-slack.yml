@@ -2,6 +2,7 @@ name: New PR Notifications
 on:
   pull_request:
     types: [opened, reopened]           # Triggers when a new PR is opened
+    workflow_dispatch:          # Allow manual testing
 
 jobs:
   notify-new-pr:

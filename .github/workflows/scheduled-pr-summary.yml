@@ -55,7 +55,7 @@ jobs:
               }).join(', ') || 'None';
             
               message += `• <${pr.html_url}|${pr.title}>\n`;
-              message += `  👤 ${pr.user.login} • 📅 ${ageText} \n • Reviewers: 👀 - ${reviewRequests}\n\n`;
+              message += `  🧑‍💻 ${pr.user.login} • 📅 ${ageText} \n • Reviewers: 👀 - ${reviewRequests}\n\n`;
             }
             
             core.setOutput('message', message);

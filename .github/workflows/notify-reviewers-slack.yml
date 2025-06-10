@@ -51,9 +51,9 @@ jobs:
             const reviewerText = allReviewers.length > 0 ? allReviewers.join(', ') : 'None assigned';
             
             // Build the Slack message
-            let message = `🆕 Pull Request Opened!*\n\n`;
+            let message = `🆕 Documentation Pull Request Opened!\n\n`;
             message += `📋 <${pr.html_url}|${pr.title}>\n`;
-            message += `👤 Author: ${pr.user.login}\n`;
+            message += `🧑‍💻 Author: ${pr.user.login}\n`;
             message += `📅 Created: ${ageText}\n`;
             message += `👀 Reviewers: ${reviewerText}\n\n`;
             
@@ -75,5 +75,6 @@ jobs:
           SLACK_TITLE: "📢 New PR: ${{ steps.pr-details.outputs.pr_title }}"
           SLACK_USERNAME: GitHub Bot
           SLACK_FOOTER: "PR opened by ${{ steps.pr-details.outputs.pr_author }}"
+          SLACKIFY_MARKDOWN: true
           MSG_MINIMAL: true
           ENABLE_ESCAPES: true

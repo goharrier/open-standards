@@ -19,13 +19,13 @@ jobs:
             const userMapping = {
               "jackcroninuipath": "U03K7LGLLRK",
               "Stephen-Browne": "U049B624K0T",
-              "JAertgeerts" : "U87A5RJ1E",
-              "JMac1066" : "U05MQ0K80E4",
-              "hongi-pham" : "U06SYQ3CPUJ",
-              "javier-orbe-harrier : "U08DDJEQGEQ",
-              "sathishgoharrier" : "U03088B4FJP",
-              "tverellen" : "U08240CELP8",
-              "wimvelzeboer" : "U025WNW8RU4"
+              "JAertgeerts": "U87A5RJ1E",
+              "JMac1066": "U05MQ0K80E4",
+              "hongi-pham": "U06SYQ3CPUJ",
+              "javier-orbe-harrier": "U08DDJEQGEQ",
+              "sathishgoharrier": "U03088B4FJP",
+              "tverellen": "U08240CELP8",
+              "wimvelzeboer": "U025WNW8RU4"
             };
             
             // Get the PR that triggered this workflow

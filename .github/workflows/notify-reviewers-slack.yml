@@ -72,7 +72,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: ${{ steps.pr-details.outputs.message }}
-          SLACK_TITLE: "📢 New PR: ${{ steps.pr-details.outputs.pr_title }}"
+          SLACK_TITLE: "📢 New Documentation Pull Request Opened: ${{ steps.pr-details.outputs.pr_title }}"
           SLACK_USERNAME: GitHub Bot
           SLACK_FOOTER: "PR opened by ${{ steps.pr-details.outputs.pr_author }}"
           SLACKIFY_MARKDOWN: true

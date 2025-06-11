@@ -2,6 +2,7 @@ name: New PR Notifications
 on:
   pull_request:
     types: [opened, reopened]           # Triggers when a new PR is opened
+    workflow_dispatch:          # Allow manual testing
 
 jobs:
   notify-new-pr:
@@ -51,9 +52,8 @@ jobs:
             const reviewerText = allReviewers.length > 0 ? allReviewers.join(', ') : 'None assigned';
             
             // Build the Slack message
-            let message = `🆕 Pull Request Opened!*\n\n`;
-            message += `📋 <${pr.html_url}|${pr.title}>\n`;
-            message += `👤 Author: ${pr.user.login}\n`;
+            let message = `📋 <${pr.html_url}|${pr.title}>\n`;
+            message += `🧑‍💻 Author: ${pr.user.login}\n`;
             message += `📅 Created: ${ageText}\n`;
             message += `👀 Reviewers: ${reviewerText}\n\n`;
             
@@ -72,7 +72,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: ${{ steps.pr-details.outputs.message }}
-          SLACK_TITLE: "📢 New PR: ${{ steps.pr-details.outputs.pr_title }}"
+          SLACK_TITLE: "📢 New Documentation Pull Request Opened: ${{ steps.pr-details.outputs.pr_title }}"
           SLACK_USERNAME: GitHub Bot
           SLACK_FOOTER: "PR opened by ${{ steps.pr-details.outputs.pr_author }}"
           MSG_MINIMAL: true

@@ -32,8 +32,13 @@ jobs:
             };
             
             // Get the PR that triggered this workflow
-            const pr = context.payload.pull_request;
-            
+            const { data: pr } = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number
+            });
+      
+      
             // Calculate age (should be "just now" for new PRs)
             const minutesSinceCreated = Math.floor((Date.now() - new Date(pr.created_at)) / (1000 * 60));
             const ageText = minutesSinceCreated < 5 ? 'just now' : `${minutesSinceCreated} minutes ago`;

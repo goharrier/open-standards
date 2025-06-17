@@ -10,7 +10,7 @@
     * [Custom Permissions Conventions](technical/best-practices/naming-conventions/custom-permissions-conventions.md)
     * [Profile Conventions](technical/best-practices/naming-conventions/profile-conventions.md)
     * [Permission Set (Group) Conventions](technical/best-practices/naming-conventions/permission-set-group-conventions.md)
-    * [Apex Style Guide](technical/best-practices/naming-conventions/apex-style-guide.md)
+  * [Apex Style Guide](technical/best-practices/apex-style-guide.md)
   * [Feature flags](technical/best-practices/feature-flags.md)
 * [Documentation](technical/documentation/README.md)
   * [GPT Instructions](technical/documentation/gpt-instructions.md)

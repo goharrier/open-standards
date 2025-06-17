@@ -1,7 +1,10 @@
 name: New PR Notifications
 on:
+  workflow_run:
+    workflows: ["Auto Assign Reviewers"]  # Wait for this workflow to complete
+    types: [completed]
   pull_request:
-    types: [opened, reopened]           # Triggers when a new PR is opened
+    types: [reopened]  # Keep reopened for reopened PRs     # Triggers when a new PR is opened
 
 jobs:
   notify-new-pr:

@@ -4,15 +4,10 @@ on:
     types: [opened]
 
 jobs:
-  auto-assign:
+  assign:
     runs-on: ubuntu-latest
     steps:
-      - uses: wow-actions/auto-assign@v3
+      - uses: hkusu/review-assign-action@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          numberOfReviewers: 2
-          addReviewers: true          # Default
-          addAssignees: false         # Don't assign people, just request reviews
-          reviewers: |
-            JMac1066
-            wimvelzeboer
+          reviewers: JMac1066, wimvelzeboer
+          max-num-of-reviewers: 1

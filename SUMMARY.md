@@ -14,7 +14,6 @@
   * [Development Principles](technical/best-practices/development-principles.md)
   * [Apex Unit Testing Guidelines](technical/best-practices/apex-unit-testing-guidelines.md)
   * [Feature flags](technical/best-practices/feature-flags.md)
-  * [Automation User Management](technical/best-practices/automation-user-management.md)
 * [Documentation](technical/documentation/README.md)
   * [GPT Instructions](technical/documentation/gpt-instructions.md)
 * [Frameworks](technical/frameworks/README.md)

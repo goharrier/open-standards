@@ -9,5 +9,5 @@ jobs:
     steps:
       - uses: hkusu/review-assign-action@v1
         with:
-          reviewers: JMac1066, wimvelzeboer
+          reviewers: JMac1066, wimvelzeboer, Stephen-Browne, satishgoharrier, jackcroninuipath, hongi-pham, tverellen, javier-orbe-harrier
           max-num-of-reviewers: 1

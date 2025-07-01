@@ -12,7 +12,7 @@ jobs:
       contents: read
     steps:
       - name: Wait for auto-assignment to complete
-        run: sleep 30
+        run: sleep 15
       - name: Get PR Details and Notify
         id: pr-details
         uses: actions/github-script@v7

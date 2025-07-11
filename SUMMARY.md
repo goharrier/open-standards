@@ -11,6 +11,8 @@
     * [Profile Conventions](technical/best-practices/naming-conventions/profile-conventions.md)
     * [Permission Set (Group) Conventions](technical/best-practices/naming-conventions/permission-set-group-conventions.md)
   * [Apex Style Guide](technical/best-practices/apex-style-guide.md)
+  * [Development Principles](technical/best-practices/development-principles.md)
+  * [Apex Unit Testing Guidelines](technical/best-practices/apex-unit-testing-guidelines.md)
   * [Feature flags](technical/best-practices/feature-flags.md)
 * [Documentation](technical/documentation/README.md)
   * [GPT Instructions](technical/documentation/gpt-instructions.md)

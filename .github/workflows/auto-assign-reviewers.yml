@@ -1,0 +1,13 @@
+name: Auto Assign Reviewers
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hkusu/review-assign-action@v1
+        with:
+          reviewers: JMac1066, wimvelzeboer, Stephen-Browne, satishgoharrier, jackcroninuipath, hongi-pham, tverellen, javier-orbe-harrier
+          max-num-of-reviewers: 1

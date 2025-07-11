@@ -41,7 +41,7 @@ src/
 
 Since Salesforce operates with a global class namespace, we use consistent naming patterns and suffixes to maintain module isolation and code clarity.
 
-**Exception:** Classes in the `core` module do not use suffixes, as they represent foundational functionality that may be referenced across all other modules.
+**Exception:** Classes in the `core` module do not use suffixes.
 
 **Benefits of This Approach:**
 1. Module Isolation: Each module contains related functionality, making it easier to understand and maintain specific business domains.
@@ -81,6 +81,5 @@ module-name/
 - `selectors/`: Data access layer classes with their interfaces
 - `services/`: Business service layer with implementations and interfaces
 - `triggerActions/`: Trigger handler classes
-- `Application.cls`: Module's main application entry point
 
 > **Note:** For a deeper understanding of the domains, selectors, services, and trigger actions architectural patterns, refer to the FFLIB package documentation page *(documentation is currently in development and will be available in the future)*.

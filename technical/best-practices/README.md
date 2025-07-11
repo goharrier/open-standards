@@ -4,8 +4,8 @@
 [naming-conventions](naming-conventions/)
 {% endcontent-ref %}
 
-{% content-ref url="apex-style-guide/" %}
-[apex-style-guide](apex-style-guide/)
+{% content-ref url="apex-style-guide.md" %}
+[apex-style-guide](apex-style-guide.md)
 {% endcontent-ref %}
 
 {% content-ref url="development-principles.md" %}

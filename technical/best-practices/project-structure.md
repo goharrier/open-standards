@@ -82,4 +82,4 @@ module-name/
 - `services/`: Business service layer with implementations and interfaces
 - `triggerActions/`: Trigger handler classes
 
-> **Note:** For a deeper understanding of the domains, selectors, services, and trigger actions architectural patterns, refer to the FFLIB package documentation page *(documentation is currently in development and will be available in the future)*.
+> **Note:** For a deeper understanding of the domains, selectors, services, and trigger actions architectural patterns, refer to the [fflib - Apex Framework](../frameworks/fflib-apex-framework) documentation.

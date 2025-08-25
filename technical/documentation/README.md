@@ -2,15 +2,11 @@
 
 ## Index
 
-[#diagrams](./#diagrams "mention")
-
-[#design-decisions](./#design-decisions "mention")
-
-[#template-design-decision](./#template-design-decision "mention")
-
-[#feature-design-documentation](./#feature-design-documentation "mention")
-
-[#template-feature-name](./#template-feature-name "mention")
+- [Diagrams](#diagrams)
+- [Design Decisions](#design-decisions)
+- [Template: Design Decision](#template-design-decision)
+- [Feature Design Documentation](#feature-design-documentation)
+- [Template: Feature Name](#template-feature-name)
 
 ## Diagrams
 

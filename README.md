@@ -10,36 +10,32 @@ You can contribute to these open standards by opening a Pull Request to [our rep
 
 This space is dedicated to the development, configuration, deployment, and various opinionated strategies within the **Salesforce ecosystem**. Our goal is to ensure a cohesive approach and a shared understanding among our team members and potentially the entire community.
 
-## Who are we
+## Who We Are
 
-* [ ] Write out section about Harrier and why we do this.
+Harrier is a specialized Salesforce consultancy focused on delivering enterprise-grade solutions through proven architectural patterns and engineering excellence. We maintain these open standards to ensure consistency, quality, and knowledge sharing across our projects and the broader Salesforce community.
 
-## Roadmap
+## Our Approach
 
-* [ ] Software Engineering Design Patterns we apply and references to how to use them in Apex / lwc. Refer to generic documentation online on the theory.
-* [ ] Conventions on development and configuration
-* [ ] Strategies we use for shaping requirements, translating requirements into technical solution designs and documentation.
-* [ ] Our PMO approach
-  * [ ] No nonsense
-  * [ ] Clear & honest communication
-  * [ ] Always come up with a plan
-* [ ] Frameworks / reusable components we use and build (fflib, nebula, etc.)
-  * [ ] Refactoring approaches
-  * [ ] Practical examples explaining each step of refactoring
-  * [ ] Code examples on what good looks like vs bad
-* [ ] Tools we use for:
-  * [ ] DevOps
-  * [ ] Development
-  * [ ] Project Management
-* [ ] Integration strategies and tools we use and problems they solve
-* [ ] Archetypes / reference architectures
-* [ ] Anti-patterns and how to avoid them
-  * [ ] Practical examples with code / configuration
-* [ ] Overengineering small problems vs "under"engineering young / small organisations
-  * [ ] Practical examples with code / configuration
-* [ ] Prototyping
-* [ ] Documentation approach:
-  * [ ] Technical Documentation
-  * [ ] Functional Documentation
-  * [ ] GPT instructions to aid documentation generation
+We believe in:
+- **No-nonsense delivery** - Clear, honest communication and practical solutions
+- **Engineering excellence** - Following proven patterns and best practices
+- **Knowledge sharing** - Building on open-source frameworks and contributing back to the community
+- **Avoiding vendor lock-in** - Creating flexible solutions that empower our clients
+
+## What You'll Find Here
+
+This documentation covers:
+
+### Technical Standards
+- **Best Practices** - Apex style guides, naming conventions, and development principles
+- **Frameworks** - How we leverage fflib, Nebula Logger, and flxbl in our implementations
+- **Design Patterns** - Proven architectural patterns for Salesforce development
+- **Anti-Patterns** - Common pitfalls and how to avoid them
+- **Integration Strategies** - Modern approaches to system integration
+
+### Functional Standards  
+- **Requirement Definition** - How we shape and document requirements
+- **Documentation Approach** - Standards for technical and functional documentation
+
+Each section focuses on practical, implementation-ready guidance based on real-world experience, not theoretical concepts.
 

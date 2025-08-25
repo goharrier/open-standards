@@ -1,17 +1,23 @@
 # Best Practices
 
-{% content-ref url="naming-conventions/" %}
-[naming-conventions](naming-conventions/)
-{% endcontent-ref %}
+This section contains Harrier's best practices and standards for Salesforce development. These guidelines ensure consistency, maintainability, and quality across all implementations.
 
-{% content-ref url="apex-style-guide.md" %}
-[apex-style-guide](apex-style-guide.md)
-{% endcontent-ref %}
+## Documentation Index
 
-{% content-ref url="development-principles.md" %}
-[development-principles.md](development-principles.md)
-{% endcontent-ref %}
+### [Naming Conventions](naming-conventions/)
+Comprehensive naming standards for all Salesforce metadata types, ensuring consistency and clarity across the platform.
 
-{% content-ref url="apex-unit-testing-guidelines.md" %}
-[apex-unit-testing-guidelines.md](apex-unit-testing-guidelines.md)
-{% endcontent-ref %}
+### [Apex Style Guide](apex-style-guide)
+Code formatting and style standards for Apex development, promoting readable and maintainable code.
+
+### [Development Principles](development-principles)
+Core principles that guide our approach to Salesforce development, from architecture to implementation.
+
+### [Apex Unit Testing Guidelines](apex-unit-testing-guidelines)
+Standards and best practices for writing effective unit tests that ensure code quality and reliability.
+
+### [Feature Flags](feature-flags)
+Implementation patterns for feature toggles, enabling controlled rollouts and safer deployments.
+
+### [Salesforce Project Structure](project-structure)
+Module-based architecture patterns for organizing Salesforce projects at scale.

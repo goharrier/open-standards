@@ -319,32 +319,6 @@ public class DocumentMetadata {
 5. **Missing data migration strategy** - Plan for structure evolution
 6. **Ignoring governor limits** - Large JSON processing can hit CPU limits
 
-## Migration and Evolution Strategy
-
-When JSON structures need to evolve:
-
-```apex
-public class MetadataVersionManager {
-    public Map<String, Object> migrate(String jsonString) {
-        Map<String, Object> data = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
-        
-        // Check version
-        Integer version = (Integer) data.get('version');
-        if (version == null) version = 1;
-        
-        // Apply migrations sequentially
-        if (version < 2) {
-            data = migrateV1ToV2(data);
-        }
-        if (version < 3) {
-            data = migrateV2ToV3(data);
-        }
-        
-        return data;
-    }
-}
-```
-
 ## Conclusion
 
 The JSON field storage pattern provides a powerful solution for managing non-transactional, display-oriented data in Salesforce. By understanding when and how to apply this pattern, development teams can build more flexible, maintainable applications while avoiding the overhead of excessive custom fields and objects.

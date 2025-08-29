@@ -342,7 +342,7 @@ private enum Answer {
 }
 ```
 
-An enum with no documentation on its constants may optionally be formatted as if it were an list initializer (see [Section 4.7.3.1](https://github.com/wimvelzeboer/fflib-apex-extensions/blob/main/Apex-Styleguide.md#473---lists)) on list initializers).
+An enum with no documentation on its constants may optionally be formatted as if it were an list initializer (see Section 4.7.3 on list initializers).
 
 `private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }`
 
@@ -389,7 +389,7 @@ public static List<String> getAccountNames(List<ID> ids) { ... }
 
 #### 4.7.5 - Comments
 
-This section addresses implementation comments. ApexDoc is addressed separately in [Section 7](https://github.com/wimvelzeboer/fflib-apex-extensions/blob/main/Apex-Styleguide.md#7---apexdoc), ApexDoc.
+This section addresses implementation comments. ApexDoc is addressed separately in Section 7, ApexDoc.
 
 Any line break may be preceded by arbitrary whitespace followed by an implementation comment. Such a comment renders the line non-blank.
 

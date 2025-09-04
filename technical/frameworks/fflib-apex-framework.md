@@ -71,7 +71,11 @@ For teams building enterprise-scale Salesforce applications with multiple develo
 2. **Start with the Team's Strongest Developer**\
    Have your most experienced software engineer implement the first few features using fflib. They'll establish patterns others can follow. Don't let everyone figure it out independently - you'll end up with different interpretations of the same patterns.
 3. **Invest in Learning**\
-   Budget 2-4 weeks for developers new to enterprise patterns to become productive with fflib. For experienced Java/.NET developers, it's faster. For Salesforce-only developers, it's a significant paradigm shift. Consider:\n - Internal workshops on DI, mocking, and layer architecture\n - Pair programming during initial implementation\n - Code review checklists specific to fflib patterns\n - A reference implementation in your codebase
+   Budget 2-4 weeks for developers new to enterprise patterns to become productive with fflib. For experienced Java/.NET developers, it's faster. For Salesforce-only developers, it's a significant paradigm shift. Consider:
+   1. Internal workshops on DI, mocking, and layer architecture
+   2. Pair programming during initial implementation
+   3. Code review checklists specific to fflib patterns
+   4. A reference implementation in your codebase
 4. **Mock Everything, Test Fast**\
    The framework's value emerges when you embrace mocking. If you're still writing tests that insert records, you're missing the point. Every test should run in milliseconds, not seconds. Learn fflib-apex-mocks deeply - it's as important as the framework itself.
 5. **Layer Responsibilities (Our Rules):**

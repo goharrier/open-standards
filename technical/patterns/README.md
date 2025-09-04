@@ -4,7 +4,7 @@ This section documents architectural and design patterns used at Harrier for Sal
 
 ## Patterns Documentation
 
-### [JSON Field Storage Pattern](./#json-field-storage-pattern)
+### [JSON Field Storage Pattern](json-field-storage-pattern.md)
 
 Leverages LongTextArea fields to store JSON-serialized data for non-transactional, display-oriented information. Provides schema flexibility while avoiding object proliferation for supplementary data that doesn't require querying or workflow processing.
 

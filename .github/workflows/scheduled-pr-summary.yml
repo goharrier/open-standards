@@ -37,7 +37,7 @@ jobs:
             });
             
             if (prs.length === 0) {
-              core.setOutput('message', '🎉 No open pull requests!');
+              core.setOutput('skip_notification', 'true');
               return;
             }
             
@@ -59,8 +59,10 @@ jobs:
             }
             
             core.setOutput('message', message);
+            core.setOutput('skip_notification', 'false');
 
       - name: Send Slack notification
+        if: steps.get-prs.outputs.skip_notification != 'true'
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}

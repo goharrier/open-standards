@@ -1,5 +1,7 @@
 # Access Management
 
-(to do)
+{% hint style="info" %}
+## TODO
 
-[//]: # (profiles vs perm sets/groups, custom permissions, roles, sharing rules)
+Profiles, Permission Sets/Groups, Custom Permissions, Roles, Sharing Rules
+{% endhint %}

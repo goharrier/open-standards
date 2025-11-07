@@ -2,28 +2,40 @@
 
 ## Data Seeding for Sandboxes and Scratch Orgs
 
-(to do)
+{% hint style="info" %}
+## TODO
 
-[//]: # (strategies for creating seeding data, SF CLI usage, scripts, anonymization, sfops, etc.)
+Strategies for creating seeding data, SF CLI usage, scripts, anonymization, sfops, etc.
+{% endhint %}
 
 ## Mass Import and Export of Data
 
-(to do)
+{% hint style="info" %}
+## TODO
 
-[//]: # (best practices for mass data imports/exports, tools, error handling, etc.)
+Best practices for mass data imports/exports, tools, error handling, etc.
+{% endhint %}
 
 ## De-duplication Strategies
 
-(to do)
+{% hint style="info" %}
+## TODO
 
-[//]: # (Duplicate Rules, custom Apex solutions, third-party tools)
+Duplicate Rules, custom Apex solutions, third-party tools
+{% endhint %}
 
 ## Data Retention and Lifecycle
 
-(to do)
+{% hint style="info" %}
+## TODO
+
+Data archiving strategies, legal compliance, automated data purging, etc.
+{% endhint %}
 
 ## Data Quality
 
-(to do)
+{% hint style="info" %}
+## TODO
 
-[//]: # (e.g. validation rules, data cleansing, monitoring)
+Validation rules, data cleansing, monitoring, etc.
+{% endhint %}

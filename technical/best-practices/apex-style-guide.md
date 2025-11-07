@@ -1,9 +1,10 @@
 # Apex Naming Conventions
 
 {% hint style="info" %}
-This section is still under development and needs to be put into more pragmatic terms.
+## TODO
 
-Style guide files will be made available for supported IDE's.
+- This section is still under development and needs to be put into more pragmatic terms.
+- Style guide files will be made available for supported IDE's.
 {% endhint %}
 
 ### 1 - Introduction

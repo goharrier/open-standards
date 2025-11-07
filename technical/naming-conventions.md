@@ -1,5 +1,11 @@
 # Naming Conventions
 
+{% hint style="info" %}
+## TODO
+
+Finish the naming conventions for the marked sections, and add any additional sections as needed.
+{% endhint %}
+
 Good naming conventions in software engineering are critical as they enhance readability and maintainability of the code. By adhering to a consistent set of rules for naming variables, functions, classes, and other entities, developers ensure that the code and configuration is self-explanatory, which is essential for team collaborations and future code revisions. Moreover, good naming practices reduce the learning curve for new team members and facilitate debugging and code analysis, ultimately leading to more robust and efficient software development.&#x20;
 
 Follow SFDX naming conventions as a baseline, except where otherwise noted.

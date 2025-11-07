@@ -1,5 +1,11 @@
 # Salesforce Project Structure
 
+{% hint style="info" %}
+## TODO
+
+Merge this content with [Class Folder Organization Patterns](./class-folder-organization.md), and complete the content here.
+{% endhint %}
+
 ### Module-Based Architecture
 
 In Salesforce development, the lack of traditional package systems and folder structures presents unique challenges. All Apex classes exist in a global namespace, making code organization and modularity crucial for maintainable enterprise applications.

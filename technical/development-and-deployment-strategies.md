@@ -1,10 +1,12 @@
-# Development & Deployment Strategies
+# Development and Deployment Strategies
 
 ## Overview
 
 {% hint style="info" %}
 To do: describe the different strategies we support, what the considerations are to move things like UAT left, etc. Describe it from a technical and functional point of view.
 {% endhint %}
+
+[//]: # (to do: include Git branching strategies, dev lifecycle org types and sandbox/scratch orgs, CI/CD pipelines, sfops usage, sandbox refreshes, deployments, rollbacks, etc.)
 
 ### Modularity
 

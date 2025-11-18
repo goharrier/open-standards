@@ -23,6 +23,10 @@ Nebula Logger addresses the critical need for comprehensive logging capabilities
 
 This framework fills significant gaps in Salesforce's native logging capabilities, enabling teams to proactively monitor system health, identify issues before they impact users, and provide detailed information for troubleshooting when problems occur.
 
+{% hint style="info" %}
+To see how to use Nebula Logger in practice, refer to the [Logging best practices](/technical/best-practices/logging.md) documentation.
+{% endhint %}
+
 ## Rationale
 
 Our team has chosen Nebula Logger over other logging frameworks for several reasons:

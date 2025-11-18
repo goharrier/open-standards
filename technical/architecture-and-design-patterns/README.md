@@ -1,12 +1,6 @@
-# Patterns
+# Architecture and Design Patterns
 
-This section documents architectural and design patterns used at Harrier for Salesforce development. These patterns represent proven solutions to recurring problems and provide standardized approaches to common development challenges.
-
-## Patterns Documentation
-
-### [JSON Field Storage Pattern](json-field-storage-pattern.md)
-
-Leverages LongTextArea fields to store JSON-serialized data for non-transactional, display-oriented information. Provides schema flexibility while avoiding object proliferation for supplementary data that doesn't require querying or workflow processing.
+This section documents architectural and design patterns and principles that guide the structure and organization of Salesforce implementations at Harrier. These patterns represent proven solutions to recurring problems and provide standardized approaches to common development challenges.
 
 ## When to Use Design Patterns
 
@@ -25,6 +19,24 @@ Choose patterns based on:
 2. **Team familiarity** - Can the team maintain pattern-based code?
 3. **Performance impact** - Does the pattern meet performance requirements?
 4. **Maintenance burden** - Will the pattern simplify long-term maintenance?
+
+When making architectural decisions, consider:
+
+- Business domain boundaries
+- Team structure and ownership
+- Deployment cadence requirements
+- Integration points
+- Performance requirements
+- Compliance and security needs
+
+## Evolution Strategy
+
+Architecture should evolve through:
+- Regular architectural reviews
+- Proof of concepts for new patterns
+- Incremental improvements
+- Documentation of decisions and rationale
+- Team education and knowledge sharing
 
 ## Contributing New Patterns
 

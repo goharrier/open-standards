@@ -1,3 +1,7 @@
+# Lightning Web Components Development
+
+Lightning Web Components should be used as the preferred framework for building UI on the Salesforce platform. This document outlines best practices to ensure maintainable, efficient, and high-quality LWC development.
+
 ## Tooling & Setup
 
 - **Formatter:** [Prettier for Salesforce Extensions](https://developer.salesforce.com/docs/platform/sfvscode-extensions/guide/prettier.html)  

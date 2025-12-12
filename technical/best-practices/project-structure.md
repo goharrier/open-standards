@@ -1,9 +1,9 @@
 # Salesforce Project Structure
 
 {% hint style="info" %}
-## TODO
+### TODO
 
-Merge this content with [Class Folder Organization Patterns](./class-folder-organization.md), and complete the content here.
+Merge this content with [Class Folder Organization Patterns](class-folder-organization.md), and complete the content here.
 {% endhint %}
 
 ### Module-Based Architecture

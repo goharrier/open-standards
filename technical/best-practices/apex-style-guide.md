@@ -1,10 +1,10 @@
-# Apex Naming Conventions
+# Apex Style Guide
 
 {% hint style="info" %}
-## TODO
+### TODO
 
-- This section is still under development and needs to be put into more pragmatic terms.
-- Style guide files will be made available for supported IDE's.
+* This section is still under development and needs to be put into more pragmatic terms.
+* Style guide files will be made available for supported IDE's.
 {% endhint %}
 
 ### 1 - Introduction
@@ -394,7 +394,7 @@ This section addresses implementation comments. ApexDoc is addressed separately 
 
 Any line break may be preceded by arbitrary whitespace followed by an implementation comment. Such a comment renders the line non-blank.
 
-Block comments are indented at the same level as the surrounding code. They may be in `/* ... /` _style or `// ...` style. For multi-line `/ ... */`\`_comments, subsequent lines must start with `*` aligned with the `*` on the previous line.
+Block comments are indented at the same level as the surrounding code. They may be in `/* ... /` \_style or `// ...` style. For multi-line `/ ... */`\`\_comments, subsequent lines must start with `*` aligned with the `*` on the previous line.
 
 ```
 /*
@@ -447,7 +447,7 @@ Underscores may appear in unit test method names to separate logical components 
 
 Constant names use CONSTANT\_CASE: all uppercase letters, with words separated by underscores. But what is a constant, exactly?
 
-Constants are static final fields whose contents are deeply immutable and whose methods have no detectable side effects. This includes primitives, Strings, immutable types, and immutable collections of immutable types. If any of the instance's observable state can change, it is not a constant. Merely intending to never mutate the object is not enough.&#x20;
+Constants are static final fields whose contents are deeply immutable and whose methods have no detectable side effects. This includes primitives, Strings, immutable types, and immutable collections of immutable types. If any of the instance's observable state can change, it is not a constant. Merely intending to never mutate the object is not enough.
 
 Examples:
 
@@ -519,7 +519,7 @@ Beginning with the prose form of the name:
 1. Finally, join all the words into a single identifier.
 
 {% hint style="info" %}
-_**Note:**_ the casing of the original words is almost entirely disregarded.&#x20;
+_**Note:**_ the casing of the original words is almost entirely disregarded.
 {% endhint %}
 
 Examples:

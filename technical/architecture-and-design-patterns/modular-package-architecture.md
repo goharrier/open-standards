@@ -17,23 +17,27 @@ Environment-Specific → Access Management → Feature Packages → Domain Packa
 ### 2. Package Types and Responsibilities
 
 #### Foundation Layer
-- **common**: Shared frameworks (fflib, logger) with no business logic
-- **core-unpackaged**: Base metadata that cannot be packaged
 
-#### Core Layer  
-- **core**: Central business services, selectors, and domain classes
-- Provides interfaces that other packages implement or consume
-- Contains the main Application class for dependency injection
+* **common**: Shared frameworks (fflib, logger) with no business logic
+* **core-unpackaged**: Base metadata that cannot be packaged
+
+#### Core Layer
+
+* **core**: Central business services, selectors, and domain classes
+* Provides interfaces that other packages implement or consume
+* Contains the main Application class for dependency injection
 
 #### Domain Packages
-- Feature-complete vertical slices (e.g., `revenue`, `lead-management`)
-- Self-contained with their own Application_XX class
-- Depend only on core and common
+
+* Feature-complete vertical slices (e.g., `revenue`, `lead-management`)
+* Self-contained with their own Application\_XX class
+* Depend only on core and common
 
 #### Infrastructure Packages
-- **env-specific-alias-pre**: Environment-specific configuration
-- **access-management**: Security and permissions
-- **ui**: User interface components
+
+* **env-specific-alias-pre**: Environment-specific configuration
+* **access-management**: Security and permissions
+* **ui**: User interface components
 
 ## Implementation Pattern
 
@@ -101,6 +105,7 @@ ICasesService casesService = (ICasesService) Application.Service.newInstance(ICa
 ### Cross-Package Communication
 
 Packages communicate through:
+
 1. **Service Interfaces** - Synchronous calls through defined contracts
 2. **Platform Events** - Asynchronous, loosely coupled communication
 3. **Custom Metadata** - Configuration-driven behavior
@@ -193,20 +198,23 @@ releasedefinitionProperties:
 ## Benefits
 
 ### Development Benefits
-- **Parallel Development**: Teams work on packages independently
-- **Clear Ownership**: Each package has defined boundaries
-- **Faster CI/CD**: Deploy only changed packages
-- **Isolated Testing**: Test packages in isolation with mocks
+
+* **Parallel Development**: Teams work on packages independently
+* **Clear Ownership**: Each package has defined boundaries
+* **Faster CI/CD**: Deploy only changed packages
+* **Isolated Testing**: Test packages in isolation with mocks
 
 ### Architectural Benefits
-- **Loose Coupling**: Packages communicate through interfaces
-- **High Cohesion**: Related functionality grouped together
-- **Reusability**: Packages can be shared across orgs
-- **Maintainability**: Changes isolated to specific packages
+
+* **Loose Coupling**: Packages communicate through interfaces
+* **High Cohesion**: Related functionality grouped together
+* **Reusability**: Packages can be shared across orgs
+* **Maintainability**: Changes isolated to specific packages
 
 ## Anti-Patterns to Avoid
 
 ### 1. Circular Dependencies
+
 ```apex
 // ❌ BAD: Package A depends on B, B depends on A
 // Package A
@@ -228,6 +236,7 @@ public class ServiceA implements IServiceA {
 ```
 
 ### 2. Package Sprawl
+
 ```
 // ❌ BAD: Too many small packages
 src/
@@ -244,6 +253,7 @@ src/
 ```
 
 ### 3. Hidden Coupling
+
 ```apex
 // ❌ BAD: Packages coupled through shared state
 // Package A writes to Custom Setting
@@ -262,20 +272,23 @@ public interface IConfigurationService {
 ## Package Sizing Guidelines
 
 ### When to Create a New Package
-- Distinct business domain (10+ related objects)
-- Different deployment cadence
-- Separate team ownership
-- Reusable across multiple orgs
+
+* Distinct business domain (10+ related objects)
+* Different deployment cadence
+* Separate team ownership
+* Reusable across multiple orgs
 
 ### When to Keep in Existing Package
-- Tightly coupled functionality
-- Shared transaction boundaries
-- < 5 objects or 20 classes
-- Same deployment lifecycle
+
+* Tightly coupled functionality
+* Shared transaction boundaries
+* < 5 objects or 20 classes
+* Same deployment lifecycle
 
 ## Testing Strategy
 
 ### Unit Testing
+
 ```apex
 @IsTest
 private class ServiceTest {
@@ -295,9 +308,10 @@ private class ServiceTest {
 ```
 
 ### Integration Testing
-- Deploy packages to scratch org in correct order
-- Run integration test suite across packages
-- Validate cross-package platform events
+
+* Deploy packages to scratch org in correct order
+* Run integration test suite across packages
+* Validate cross-package platform events
 
 ## Migration Path
 
@@ -313,14 +327,9 @@ private class ServiceTest {
 ## Production Implementation Patterns
 
 Successful implementations of this architecture demonstrate:
-- **Dozens of packages** managed independently in production systems
-- **Clear separation** between foundation, core, domain, and UI layers
-- **Environment-specific** configuration packages using `aliasfy: true` for environment-based deployment
-- **Package-specific Application classes** following the Application_XX pattern for each domain
-- **Successful scaling** to large development teams working in parallel without conflicts
 
-## Related Patterns
-
-- [Service Layer Pattern](./service-layer-pattern.md)
-- [Domain Layer Pattern](./domain-layer-pattern.md)
-- [Environment Configuration Pattern](./environment-configuration.md)
+* **Dozens of packages** managed independently in production systems
+* **Clear separation** between foundation, core, domain, and UI layers
+* **Environment-specific** configuration packages using `aliasfy: true` for environment-based deployment
+* **Package-specific Application classes** following the Application\_XX pattern for each domain
+* **Successful scaling** to large development teams working in parallel without conflicts

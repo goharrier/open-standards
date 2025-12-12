@@ -1,24 +1,24 @@
 # Naming Conventions
 
 {% hint style="info" %}
-## TODO
+### TODO
 
 Finish the naming conventions for the marked sections, and add any additional sections as needed.
 {% endhint %}
 
-Good naming conventions in software engineering are critical as they enhance readability and maintainability of the code. By adhering to a consistent set of rules for naming variables, functions, classes, and other entities, developers ensure that the code and configuration is self-explanatory, which is essential for team collaborations and future code revisions. Moreover, good naming practices reduce the learning curve for new team members and facilitate debugging and code analysis, ultimately leading to more robust and efficient software development.&#x20;
+Good naming conventions in software engineering are critical as they enhance readability and maintainability of the code. By adhering to a consistent set of rules for naming variables, functions, classes, and other entities, developers ensure that the code and configuration is self-explanatory, which is essential for team collaborations and future code revisions. Moreover, good naming practices reduce the learning curve for new team members and facilitate debugging and code analysis, ultimately leading to more robust and efficient software development.
 
 Follow SFDX naming conventions as a baseline, except where otherwise noted.
 
-1. [Custom Objects, Custom Metadata Types, and Custom Settings](#custom-objects-custom-metadata-types-and-custom-settings)
+1. [Custom Objects, Custom Metadata Types, and Custom Settings](naming-conventions.md#custom-objects-custom-metadata-types-and-custom-settings)
 2. [Custom Fields](https://wiki.sfxd.org/books/best-practices/page/general-conventions) (Follow SFXD Conventions)
 3. [Validation Rules](https://wiki.sfxd.org/books/best-practices/chapter/validation-rule-conventions) (Follow SFXD Conventions)
 4. [Workflow Rules](https://wiki.sfxd.org/books/best-practices/chapter/workflow-conventions) (Follow SFXD Conventions) :warning: <mark style="color:yellow;">DEPRECATED</mark>
-5. [Custom Permissions](#custom-permissions)
-6. [Profiles](#profiles)
-7. [Permission Sets and Permission Set Groups](#permission-sets-and-permission-set-groups)
+5. [Custom Permissions](naming-conventions.md#custom-permissions)
+6. [Profiles](naming-conventions.md#profiles)
+7. [Permission Sets and Permission Set Groups](naming-conventions.md#permission-sets-and-permission-set-groups)
 8. [Flows](https://wiki.sfxd.org/books/best-practices/page/flow-naming-conventions) (Follow SFXD Conventions)
-9. [Named Credentials](#named-credentials)
+9. [Named Credentials](naming-conventions.md#named-credentials)
 
 All requirement keywords in these naming conventions use the terminology defined in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) extended by [RFC 6919](https://datatracker.ietf.org/doc/html/rfc6919).
 

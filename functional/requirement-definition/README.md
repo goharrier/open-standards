@@ -10,6 +10,13 @@ Requirements should be formatted in a consistent way and always contain 3 main e
 We do not distinguish between the definitions of requirements in theoretical models, nor do we strictly adhere to 'the book' when it comes to Scrum, Agile, or Waterfall methodologies.
 {% endhint %}
 
+## AI-Assisted Requirement Definition
+
+When working with AI coding assistants, well-structured requirements become even more critical. The format described on this page serves as the foundation for [spec-driven development](./spec-driven-development.md), which uses Open Spec's artifact-guided workflow to produce complete, consistent specifications that AI assistants can reliably implement.
+
+See also:
+- [Spec-Driven Development](./spec-driven-development.md) - Using Open Spec for AI-assisted requirement generation
+
 
 
 ### **1. User Story (Requirement) Definition**

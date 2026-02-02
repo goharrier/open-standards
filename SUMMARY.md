@@ -4,6 +4,7 @@
 
 ## Technical
 
+* [AI Coding Agents](technical/ai-coding-agents.md)
 * [Naming Conventions](technical/naming-conventions.md)
 * [Best Practices](technical/best-practices/README.md)
   * [Salesforce Project Structure](technical/best-practices/project-structure.md)
@@ -46,5 +47,5 @@
 ## Functional
 
 * [Requirement definition](functional/requirement-definition/README.md)
-  * [GPT Instructions](functional/requirement-definition/gpt-instructions.md)
+  * [AI-Assisted Requirement Generation with Open Spec](functional/requirement-definition/spec-driven-development.md)
 * [Documentation](functional/documentation.md)

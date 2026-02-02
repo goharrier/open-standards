@@ -4,6 +4,7 @@
 
 ## Technical
 
+* [AI Coding Agents](technical/ai-coding-agents.md)
 * [Naming Conventions](technical/naming-conventions.md)
 * [Best Practices](technical/best-practices/README.md)
   * [Salesforce Project Structure](technical/best-practices/project-structure.md)

@@ -2,6 +2,15 @@
 
 Lightning Web Components should be used as the preferred framework for building UI on the Salesforce platform. This document outlines best practices to ensure maintainable, efficient, and high-quality LWC development.
 
+## Table of Contents
+
+- [Tooling & Setup](#tooling--setup)
+- [Component Structure and Order](#component-structure-and-order)
+- [Component Composition Principles](#component-composition-principles)
+- [Template & Styling Guidelines](#template--styling-guidelines)
+- [Testing & Validation](#testing--validation)
+- [Patterns & Anti-Patterns](#patterns--anti-patterns)
+
 ## Tooling & Setup
 
 - **Formatter:** [Prettier for Salesforce Extensions](https://developer.salesforce.com/docs/platform/sfvscode-extensions/guide/prettier.html)  
@@ -35,11 +44,11 @@ Sort items lexicographically within each section to simplify scanning and code r
 
 - **Use base components first.**  
   Always prefer standard Lightning base components (`lightning-input`, `lightning-datatable`, `lightning-record-form`, etc.) before building custom ones.
-
+- **Consider component libraries.**  
+  [Avonni Components](https://www.avonnicomponents.com) are customizable pre-made components built using the Lightning Web Components standards.
 - **Follow SLDS.**  
   Use Salesforce Lightning Design System (SLDS) classes.  
   Avoid custom CSS unless necessary. Extend SLDS, don’t replace it.
-
 - **Favor composition over inheritance.**  
   Encapsulate shared logic in service modules, not abstract base components.  
 Composition keeps components small, testable, and reusable.

@@ -21,6 +21,7 @@
   * [JSON Field Storage Pattern](technical/architecture-and-design-patterns/json-field-storage-pattern.md)
   * [Async-First Pattern with Platform Events (DoWork)](technical/architecture-and-design-patterns/async-first-pattern-with-platform-events-dowork.md)
   * [Domain Layer Pattern with Fluent Interface](technical/architecture-and-design-patterns/domain-layer-pattern-with-fluent-interface.md)
+  * [Owned State Pattern (lwc)](technical/architecture-and-design-patterns/owned-state-pattern-lwc.md)
 * [Anti-Patterns](technical/anti-patterns/README.md)
   * [General Anti-Patterns](technical/anti-patterns/general-anti-patterns.md)
   * [Apex Anti-Patterns](technical/anti-patterns/apex-anti-patterns.md)

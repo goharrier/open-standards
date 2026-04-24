@@ -15,7 +15,7 @@ jobs:
         run: sleep 15
       - name: Get PR Details and Notify
         id: pr-details
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             // GitHub username to Slack user ID mapping
@@ -59,7 +59,7 @@ jobs:
             const reviewerText = allReviewers.length > 0 ? allReviewers.join(', ') : 'None assigned';
             
             // Build the Slack message
-            let message = `🆕 Pull Request Opened!*\n\n`;
+            let message = `🆕 *Pull Request Opened!*\n\n`;
             message += `📋 <${pr.html_url}|${pr.title}>\n`;
             message += `👤 Author: ${pr.user.login}\n`;
             message += `📅 Created: ${ageText}\n`;

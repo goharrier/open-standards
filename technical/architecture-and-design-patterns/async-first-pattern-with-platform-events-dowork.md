@@ -1,57 +1,56 @@
-# Async-First Pattern with Platform Events (DoWork)
+# Async Processing with Platform Events (DoWork)
 
 ## **Overview**
 
 {% hint style="info" %}
-**When to use this pattern:** When trigger operations need to run asynchronously to avoid governor limits, prevent record locking, or ensure immediate trigger completion while deferring complex processing.
+**When to use this pattern:** When async work requires **callouts to external systems**, **multiple independent subscribers**, **cross-org communication**, or **CometD/Empapi streaming to clients**. For simple async chaining within Apex (record updates, calculations, sequential jobs), prefer the [Queueable Chain Manager](queueable-chain-manager.md) pattern instead.
 {% endhint %}
 
 #### **Purpose**
 
-The DoWork pattern provides a clean abstraction for moving synchronous trigger operations to asynchronous execution using Platform Events. This solves the common challenge of triggers that need to perform operations that would either hit governor limits, cause record locking issues, or need to run after the initial transaction commits.
+The DoWork pattern uses Platform Events as a lightweight message bus for asynchronous execution. Work items serialize themselves, publish as events, and a trigger deserializes and executes them in a separate transaction with automatic retry capabilities.
 
-#### **Context**
+#### **When Platform Events Are the Right Choice**
 
-In complex Salesforce implementations, triggers often need to:
+Platform Events add real value over Queueable Apex in specific scenarios:
 
-* Update the same record that triggered them (after auto-number generation)
-* Perform callouts to external systems
-* Execute operations that exceed governor limits when bulkified
-* Avoid holding database locks during long-running operations
+| Scenario | Why Platform Events | Why Not Queueable |
+| --- | --- | --- |
+| **External callouts** | Separate transaction; callout failures don't roll back DML | Callouts in Queueable work too, but PE gives you built-in retry and decoupling |
+| **Multiple subscriber types** | Apex trigger, Flows, CometD clients, and Empapi can all subscribe to the same event | Queueable is single-consumer by nature |
+| **Cross-org / external consumers** | CometD, Empapi, and external systems can subscribe | Queueable is internal-only |
+| **Fan-out processing** | Publish once, many subscriber types react independently | Queueable chains are sequential |
+| **Publish before commit** | With "Publish Immediately" mode, events publish before transaction commit | Queueable enqueues at commit |
+| **Fire-and-forget from LWC/Flow** | Platform Events are declaratively accessible | Queueable requires Apex invocation |
 
-Platform Events provide immediate publication (before transaction commit) with separate execution context, making them ideal for async processing.
+#### **When NOT to Use Platform Events**
+
+* **Simple async record updates** → Use [Queueable Chain Manager](queueable-chain-manager.md)
+* **Sequential job chaining** → Use [Queueable Chain Manager](queueable-chain-manager.md)
+* **Operations needing return values** → Use Queueable with polling or Platform Event callback
+* **Low-volume, single-consumer async** → Queueable is simpler and has no payload serialization overhead
+* **Operations that must respect transaction rollback** → With "Publish Immediately" mode, events cannot be rolled back (use "Publish After Commit" if rollback safety is needed, but then you lose the immediate decoupling benefit)
 
 ### **Problem Statement**
 
 #### **The Challenge**
 
-Trigger operations that modify the triggering record or perform complex operations face several challenges:
+Certain async operations need capabilities that Queueable Apex cannot provide:
 
-1. **Record Lock Contention**: Direct updates during `afterInsert` cause `UNABLE_TO_LOCK_ROW` errors in high-concurrency scenarios
-2. **Governor Limits**: Complex calculations or callouts may exceed limits when processing bulk records
-3. **Auto-Number Timing**: Auto-number fields are not populated until after insert, requiring a separate update
-4. **Transaction Rollback Risk**: Long-running operations increase the risk of entire transaction failure
-
-#### **Why Traditional Approaches Fall Short**
-
-* **@future methods**: Cannot accept SObject parameters, limited to 50 calls per transaction
-* **Queueable Apex**: Better than @future but still counts against limits and has delay
-* **Batch Apex**: Too heavyweight for simple trigger-initiated operations
-* **Direct DML in trigger**: Causes record locking and transaction coupling
+1. **Callout Decoupling**: External system calls should not be coupled to the triggering DML transaction
+2. **Fan-Out**: A single business event needs to trigger multiple independent reactions
+3. **External Subscribers**: External systems or LWC components need to react to server-side events
+4. **Retry Semantics**: Transient failures (e.g., external API timeouts) need automatic retry without custom orchestration
 
 ### **Solution**
 
 #### **Core Concept**
 
-The DoWork pattern uses Platform Events as a lightweight message bus. Work items serialize themselves, publish as events, and a trigger deserializes and executes them in a separate transaction. This provides immediate asynchronous execution with automatic retry capabilities.
-
-#### **Implementation Strategy**
+Work items implement a common interface, serialize to JSON, publish as a Platform Event, and are deserialized and executed by a trigger handler in a separate transaction. The retry count travels with the event.
 
 #### **1. Define the Work Interface**
 
-The interface defines the contract that all async work items must fulfill:
-
-```
+```apex
 public interface IDoWork {
     /**
      * Executes all the work of the work item
@@ -77,14 +76,13 @@ public interface IDoWork {
     void publish();
     void publish(Integer retries);
 }
-
 ```
 
 #### **2. Create the Abstract Base Class**
 
 The abstract class handles serialization and Platform Event publication:
 
-```
+```apex
 public abstract class DoWorkAbstract implements IDoWork {
 
     public virtual void publish() {
@@ -117,33 +115,25 @@ public abstract class DoWorkAbstract implements IDoWork {
         }
     }
 
-    /**
-     * Override this method with your own logic if required
-     * @param e The thrown exception to deal with
-     */
     public virtual void onException(Exception e) {
-        // Intentionally left blank
+        // Override with your own logic if required
     }
 
-    /**
-     * Override this method with your own logic if required
-     */
     public virtual void onFinally() {
-        // Intentionally left blank
+        // Override with your own logic if required
     }
 
     abstract public String getClassName();
 
     public class WorkException extends Exception {}
 }
-
 ```
 
 #### **3. Platform Event Trigger Handler**
 
 The trigger deserializes and executes work items with retry logic:
 
-```
+```apex
 trigger DoWorkTrigger on DoWork__e (after insert) {
     for (DoWork__e workItem : Trigger.new) {
         if (String.isBlank(workItem.Work__c)) continue;
@@ -182,130 +172,140 @@ trigger DoWorkTrigger on DoWork__e (after insert) {
     }
     Logger.saveLog();
 }
-
 ```
 
 #### **Key Components**
 
-| Component        | Purpose        | Responsibility                                    |
-| ---------------- | -------------- | ------------------------------------------------- |
-| `IDoWork`        | Interface      | Defines the contract for async work items         |
-| `DoWorkAbstract` | Abstract Base  | Handles serialization and event publication       |
-| `DoWork__e`      | Platform Event | Carries serialized work data between transactions |
-| `DoWorkTrigger`  | Event Handler  | Deserializes and executes work items with retry   |
+| Component | Purpose | Responsibility |
+| --- | --- | --- |
+| `IDoWork` | Interface | Defines the contract for async work items |
+| `DoWorkAbstract` | Abstract Base | Handles serialization and event publication |
+| `DoWork__e` | Platform Event | Carries serialized work data between transactions |
+| `DoWorkTrigger` | Event Handler | Deserializes and executes work items with retry |
 
 ### **Implementation Details**
 
 #### **Required Setup**
 
 1. **Create Platform Event**: `DoWork__e` with fields:
-   * `Work__c` (Long Text Area, 131072 chars) - Serialized work item
-   * `ClassName__c` (Text, 255) - Fully qualified class name
-   * `Retries__c` (Number) - Remaining retry attempts
+   * `Work__c` (Long Text Area, 131072 chars) — Serialized work item
+   * `ClassName__c` (Text, 255) — Fully qualified class name
+   * `Retries__c` (Number) — Remaining retry attempts
 2. **Deploy Abstract Classes**: `IDoWork` interface and `DoWorkAbstract` class
 3. **Create Trigger**: `DoWorkTrigger` on `DoWork__e`
 
-#### **Code Structure - Concrete Worker Example**
+#### **Concrete Worker Example — External Callout**
 
-```
+This is the ideal use case for the DoWork pattern: an external system callout triggered by a record change.
+
+```apex
 /**
- * Async worker that sets account number from auto-number field.
- * Must run async because auto-number is only available after insert.
+ * Syncs account data to an external ERP system after creation.
+ * Uses Platform Events because:
+ * 1. Callout failure should not roll back the Account insert
+ * 2. Built-in retry handles transient API failures
+ * 3. External monitoring tools subscribe to DoWork__e for observability
  */
-public without sharing class AsyncAccountNumberSetter extends DoWorkAbstract {
+public without sharing class AsyncErpAccountSync extends DoWorkAbstract {
 
     private final Set<Id> accountIds;
 
-    public AsyncAccountNumberSetter(Set<Id> accountIds) {
+    public AsyncErpAccountSync(Set<Id> accountIds) {
         this.accountIds = accountIds;
     }
 
     public void doWork() {
         List<Account> accounts = [
-            SELECT Auto_Account_Number__c, AccountNumber__c
+            SELECT Name, AccountNumber, BillingAddress, Industry
             FROM Account
             WHERE Id IN :accountIds
-            FOR UPDATE  // Obtain a record lock
         ];
 
-        for (Account record : accounts) {
-            record.AccountNumber__c = record.Auto_Account_Number__c;
-        }
+        ErpIntegrationService.syncAccounts(accounts);
+    }
 
-        // Disable triggers to prevent recursion
-        fflib_SObjectDomain.getTriggerEvent(AccountTriggerHandler.class).disableAll();
-        update accounts;
+    public override void onException(Exception e) {
+        // Notify integration team when retries exhausted
+        IntegrationAlertService.notifyFailure('ERP Account Sync', accountIds, e);
     }
 
     public override String getClassName() {
-        return 'AsyncAccountNumberSetter';
+        return 'AsyncErpAccountSync';
     }
 }
+```
 
+#### **Publishing with Retries**
+
+For callouts to external systems that may have transient failures:
+
+```apex
+// Allow 3 retries for transient API failures
+new AsyncErpAccountSync(accountIds).publish(3);
 ```
 
 #### **Preventing Duplicate Scheduling**
 
 When working with triggers, prevent the same async job from being scheduled multiple times in the same transaction:
 
-```
+```apex
 public with sharing class AccountTriggerHandler extends fflib_SObjectDomain {
 
-    // Static set to track scheduled jobs in current transaction
     private static Set<String> scheduledAsyncTasks = new Set<String>();
 
-    private static void setAccountNumber(IAccounts accounts) {
-        // Check if already scheduled
-        if (scheduledAsyncTasks.contains('AsyncAccountNumberSetter')) return;
+    private static void syncToErp(IAccounts accounts) {
+        if (scheduledAsyncTasks.contains('AsyncErpAccountSync')) return;
 
-        // Schedule the async work
-        new AsyncAccountNumberSetter(accounts.getRecordIds())
-            .publish();
-
-        // Mark as scheduled
-        scheduledAsyncTasks.add('AsyncAccountNumberSetter');
+        new AsyncErpAccountSync(accounts.getRecordIds()).publish(3);
+        scheduledAsyncTasks.add('AsyncErpAccountSync');
     }
 }
-
 ```
-
-#### **Configuration Requirements**
-
-* **Platform Event**: `DoWork__e` must be created with appropriate field limits
-* **Permissions**: Users/contexts publishing events need "Publish" permission on `DoWork__e`
-* **Dependencies**: Logger utility for error tracking (optional but recommended)
 
 ### **Best Practices**
 
 #### **Do's**
 
-* Use `FOR UPDATE` in queries when updating records to prevent concurrent modification issues
-* Disable triggers when performing DML to prevent recursion
-* Include meaningful class names for debugging and monitoring
-* Keep work items as small as possible to stay under the 131KB serialization limit
-* Use static tracking sets to prevent duplicate scheduling within transactions
+* Use for callouts, fan-out, and multi-subscriber scenarios
 * Implement `onException` for critical workflows that need failure notification
+* Use retries for transient failures (callout timeouts, lock contention)
+* Keep serialized payloads small — pass record IDs and query fresh data in `doWork()`
+* Include meaningful class names for debugging and monitoring
+* Use static tracking sets to prevent duplicate scheduling within transactions
 
 #### **Don'ts**
 
+* Do not use for simple async record updates — use [Queueable Chain Manager](queueable-chain-manager.md) instead
 * Do not serialize large object graphs (query fresh data in `doWork()`)
-* Do not rely on execution order - Platform Events may be processed out of order
+* Do not rely on execution order — Platform Events may be processed out of order
 * Do not store sensitive data in the event payload (it's visible in Event Monitoring)
-* Do not use for operations that must complete synchronously with the user action
+* Do not use when you need transaction rollback semantics with "Publish Immediately" mode — events fire regardless of commit outcome
 
 ### **Considerations**
+
+#### **Publish Behavior**
+
+Platform Events support two publish modes, configured per event definition:
+
+* **Publish After Commit** (default since Summer '18) — Events are published only after the transaction commits successfully. If the transaction rolls back, events are discarded. Use this for most scenarios.
+* **Publish Immediately** — Events publish before commit and cannot be rolled back. Use this when you need the subscriber to act immediately (e.g., the DoWork pattern where decoupling from the originating transaction is the whole point).
+
+{% hint style="warning" %}
+Our `DoWork__e` should use **Publish Immediately** to ensure work items fire even if the originating transaction has complex DML. If you switch to "Publish After Commit", be aware that a transaction rollback will silently discard the work item.
+{% endhint %}
 
 #### **Governor Limits**
 
 * Platform Events have their own limits separate from the triggering transaction
 * Event payload is limited to 1MB total, but individual Long Text fields max at 131,072 characters
-* Maximum 250,000 platform event allocations per 24 hours (varies by edition)
+* Event allocations are measured as **maximum deliveries per hour** and vary by org edition — check Setup → Platform Events → Usage to see your org's limits
+* Only one Apex trigger is allowed per Platform Event object (same as standard sObjects), but multiple subscriber types (Apex trigger, Flow, CometD, Empapi) can listen independently
 
 #### **Performance Impact**
 
-* Platform Events are highly performant for async processing
-* Events are published immediately, not at transaction commit
+* With "Publish Immediately", events fire before transaction commit; with "Publish After Commit", they fire after
 * Parallel processing of events provides horizontal scalability
+* Each event fires in its own transaction with full governor limits
 
 #### **Security Implications**
 
@@ -313,82 +313,70 @@ public with sharing class AccountTriggerHandler extends fflib_SObjectDomain {
 * Use appropriate sharing settings (`with sharing` vs `without sharing`) in work classes
 * Consider field-level security when updating records
 
-### **Variations**
-
-#### **Variation 1: Base Worker with Common State**
-
-For domain-specific workers, create an intermediate abstract class:
+### **Decision Guide: Platform Events vs Queueable**
 
 ```
-public abstract class AsyncAccountWorker extends DoWorkAbstract {
-    protected final Set<Id> accountIds;
-
-    public AsyncAccountWorker(Set<Id> accountIds, String className) {
-        this.accountIds = accountIds;
-        AccountTriggerHandler.scheduledAsyncTasks.add(className);
-    }
-
-    abstract public override String getClassName();
-}
-
-```
-
-#### **Variation 2: Worker with Retry Configuration**
-
-For operations that may fail transiently:
-
-```
-public void scheduleWithRetries() {
-    new AsyncExternalSync(recordIds).publish(3);  // Allow 3 retries
-}
-
+Need async processing?
+├── Callout to external system?
+│   └── YES → Platform Events (DoWork) with retries
+├── Multiple independent subscribers?
+│   └── YES → Platform Events (DoWork)
+├── External/LWC consumers need to react?
+│   └── YES → Platform Events (DoWork)
+├── Sequential job chaining?
+│   └── YES → Queueable Chain Manager
+├── Simple async record update?
+│   └── YES → Queueable Chain Manager
+└── Single async job, no special requirements?
+    └── YES → Queueable Chain Manager (or direct System.enqueueJob)
 ```
 
 ### **Testing Approach**
 
-#### **Unit Test Strategy**
-
-```
+```apex
 @IsTest
-private class AsyncAccountNumberSetterTest {
+private class AsyncErpAccountSyncTest {
 
     @IsTest
-    static void itShouldSetAccountNumber() {
-        // Disable trigger to set up test data cleanly
-        fflib_SObjectDomain.getTriggerEvent(AccountTriggerHandler.class).disableAll();
-        insert new AutomationBypass__c(TR_Account_Trigger_Disabled__c = true);
-
-        // GIVEN an account without account number
-        Account account = new Account(Name = 'Test');
+    static void itShouldSyncAccountToErp() {
+        // GIVEN an account
+        Account account = new Account(Name = 'Test Corp', Industry = 'Technology');
         insert account;
 
         // WHEN the async worker is published and events are delivered
-        System.Test.startTest();
-        new AsyncAccountNumberSetter(new Set<Id>{account.Id}).publish();
-        System.Test.getEventBus().deliver();  // Critical: deliver events in test
-        System.Test.stopTest();
+        Test.startTest();
+        new AsyncErpAccountSync(new Set<Id>{ account.Id }).publish(1);
+        Test.getEventBus().deliver();
+        Test.stopTest();
 
-        // THEN the account number should be populated
-        Account result = [SELECT AccountNumber__c FROM Account WHERE Id = :account.Id];
-        System.Assert.isNotNull(result.AccountNumber__c, 'Account number should be set');
+        // THEN verify the ERP sync occurred
+        // (assert via mock callout or custom object log)
+    }
+
+    @IsTest
+    static void itShouldRetryOnTransientFailure() {
+        // GIVEN a failing external service (via mock)
+        // WHEN the worker fails and has retries remaining
+        // THEN a new event should be published with decremented retry count
+    }
+
+    @IsTest
+    static void itShouldCallOnExceptionWhenRetriesExhausted() {
+        // GIVEN a failing external service with 0 retries
+        // WHEN the worker fails
+        // THEN onException should be invoked
     }
 }
-
 ```
-
-#### **Test Scenarios**
-
-1. **Happy Path**: Verify work executes successfully and updates records
-2. **Retry Logic**: Verify retries occur on transient failures
-3. **Error Handling**: Verify `onException` is called when retries are exhausted
-4. **Duplicate Prevention**: Verify same work item is not scheduled twice
 
 ### **Trade-offs**
 
-| Benefit                         | Cost                                 |
-| ------------------------------- | ------------------------------------ |
-| Immediate trigger completion    | Eventual consistency (not real-time) |
-| Separate governor limit context | Added complexity in testing          |
-| Built-in retry mechanism        | Requires Platform Event monitoring   |
-| Prevents record locking         | Cannot return values to caller       |
-| Horizontal scalability          | Event ordering not guaranteed        |
+| Benefit | Cost |
+| --- | --- |
+| Decoupled callout execution | Eventual consistency (not real-time) |
+| Built-in retry mechanism | Added complexity in testing |
+| Multiple subscribers / fan-out | Requires Platform Event monitoring |
+| External system subscription | Cannot return values to caller |
+| Immediate publication (with Publish Immediately) | Events cannot be rolled back in Publish Immediately mode |
+| Horizontal scalability | 131KB serialization limit per work item |
+| Separate governor limit context | Hourly event allocation limits (varies by edition) |
